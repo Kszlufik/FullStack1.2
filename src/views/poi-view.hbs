@@ -1,0 +1,11 @@
+{{> menu}}
+
+<section class="section">
+  <div class="title">
+    {{poi.title}}
+  </div>
+  <p>{{poi.description}}</p>
+  <p>Location: {{poi.latitude}}, {{poi.longitude}}</p>
+  {{> list-markers}}
+  {{> add-marker}}
+</section>

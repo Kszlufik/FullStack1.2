@@ -1,0 +1,87 @@
+{
+  "users": [
+    {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "secret",
+      "_id": "de8a31d3-ba2a-401c-a4bc-63bd3364621b"
+    },
+    {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "secret",
+      "_id": "7ea547b6-4fef-431b-bb1e-6dc79daf5a22"
+    },
+    {
+      "firstName": "Bart",
+      "lastName": "Simpson",
+      "email": "bart@simpson.com",
+      "password": "secret",
+      "_id": "4250906d-8391-4019-84a8-669aff343894"
+    },
+    {
+      "firstName": "kamil",
+      "lastName": "szlufik",
+      "email": "ataner31@hotmail.com",
+      "password": "333",
+      "_id": "e2fb74f1-ca00-45f3-870f-707dcf988c70"
+    },
+    {
+      "firstName": "kamil",
+      "lastName": "szlufik",
+      "email": "ataner31@hotmail.com",
+      "password": "111111",
+      "_id": "c20bb39d-547c-47e8-888b-506bdf842100"
+    },
+    {
+      "firstName": "adam",
+      "lastName": "adam",
+      "email": "adam123@hotmail.com",
+      "password": "4321",
+      "_id": "67f1aa31-2a65-404f-9398-81f5ca875170"
+    },
+    {
+      "firstName": "joy",
+      "lastName": "joy",
+      "email": "joy123@hotmail.com",
+      "password": "123456",
+      "_id": "4d1a3fbe-9bae-4c25-a8ea-cf171b30fc6e"
+    }
+  ],
+  "pois": [
+    {
+      "title": "Grand Canyon",
+      "description": "A breathtaking natural wonder in Arizona",
+      "latitude": 36.1069,
+      "longitude": -112.1129,
+      "_id": "f2b254d5-e9b7-481d-b12c-9eeb51d673cd"
+    },
+    {
+      "title": "Great Wall of China",
+      "description": "Historic fortification in China",
+      "latitude": 40.4319,
+      "longitude": 116.5704,
+      "_id": "c7a420d6-589f-4ec2-8b78-b2a56764b6e1"
+    },
+    {
+      "userId": "4d1a3fbe-9bae-4c25-a8ea-cf171b30fc6e",
+      "title": "rome",
+      "description": "rome",
+      "latitude": 123,
+      "longitude": 321,
+      "_id": "8bd97e4c-395d-4138-bc70-de3e61ed8bb4"
+    }
+  ],
+  "markers": [
+    {
+      "title": "11",
+      "description": "@",
+      "latitude": "@",
+      "longitude": "@",
+      "_id": "1a99692b-125f-4fdf-888c-a3614f3a5975",
+      "poiId": "e2fefcf1-fd18-460b-81b0-1e81fb141b91"
+    }
+  ]
+}
