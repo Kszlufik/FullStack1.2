@@ -1,11 +1,7 @@
-{{#each pois}}
-  <div class="box box-link-hover-shadow">
-    <h2 class="title">{{title}}</h2>
-    <p>{{description}}</p>
-    <p>Location: {{latitude}}, {{longitude}}</p>
-    <a href="/poi/{{_id}}" class="button">View Details</a>
-    <a href="/dashboard/deletepoi/{{_id}}" class="button">
-      <i class="fas fa-trash"></i>
-    </a>
-  </div>
-{{/each}}
+<ul>
+  {{#each pois}}
+    <li>
+      <a href="/poi/{{this._id}}">{{this.title}} ({{this.category}})</a> 
+    </li>
+  {{/each}}
+</ul>

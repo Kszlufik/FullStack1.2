@@ -1,7 +1,11 @@
 <form action="/dashboard/addpoi" method="POST">
   <div class="field">
     <label class="label">POI Title</label>
-    <input class="input" type="text" placeholder="Enter POI title" name="title">
+    <input class="input" type="text" placeholder="Enter POI title" name="title" required>
+  </div>
+  <div class="field">
+    <label class="label">Category</label>
+    <input class="input" type="text" placeholder="Enter Category" name="category" required>
   </div>
   <div class="field">
     <label class="label">Description</label>

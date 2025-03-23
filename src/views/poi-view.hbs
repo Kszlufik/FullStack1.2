@@ -5,7 +5,51 @@
     {{poi.title}}
   </div>
   <p>{{poi.description}}</p>
-  <p>Location: {{poi.latitude}}, {{poi.longitude}}</p>
+  <p><strong>Location:</strong> {{poi.latitude}}, {{poi.longitude}}</p>
+
+  <hr>
+  
+  <h2>Please Upload POI Image Here</h2>
+  {{#if poi.images.length}}
+    <div class="columns is-multiline">
+      {{#each poi.images}}
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <img src="{{this}}" alt="Marker Image">
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="content">
+                <p>POI Image</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <p>No marker POI uploaded yet.</p>
+  {{/if}}
+
+  <hr>
+
+  <h2>Upload a Marker Image</h2>
+  <form action="/poi/{{poi._id}}/upload-image" method="POST" enctype="multipart/form-data">
+    <div class="field">
+      <label class="label">Image</label>
+      <div class="control">
+        <input type="file" name="image" accept="image/*">
+      </div>
+    </div>
+    <div class="field">
+      <div class="control">
+        <button class="button is-link" type="submit">Upload</button>
+      </div>
+    </div>
+  </form>
+
   {{> list-markers}}
   {{> add-marker}}
-</section>
+  </section>

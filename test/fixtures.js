@@ -27,7 +27,7 @@ export const testUsers = [
   },
 ];
 
-// Sample POI (Point of Interest)
+// Sample POI 
 export const eiffelTower = {
   title: "Eiffel Tower",
   description: "Famous landmark in Paris",
@@ -35,7 +35,7 @@ export const eiffelTower = {
   longitude: 2.2945,
 };
 
-// Test POI List
+// Test poi list
 export const testPOIs = [
   {
     title: "Grand Canyon",

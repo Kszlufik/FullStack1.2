@@ -8,7 +8,6 @@ suite("POI Model tests", () => {
     db.init("json");
     await db.poiStore.deleteAllPOIs();
     for (let i = 0; i < testPOIs.length; i += 1) {
-      // eslint-disable-next-line no-await-in-loop
       testPOIs[i] = await db.poiStore.addPOI(testPOIs[i]);
     }
   });

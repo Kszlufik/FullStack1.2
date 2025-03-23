@@ -1,6 +1,25 @@
 {{> menu active="dashboard"}}
 
 <section class="section">
+  <form action="/search" method="GET">
+    <div class="field">
+      <input class="input" type="text" name="query" placeholder="Search POIs..." required>
+      <button class="button is-link">Search</button>
+    </div>
+  </form>
+
+  {{#if searchError }}
+    <div class="notification is-danger">
+      {{ searchError }}
+    </div>
+  {{/if}}
+
+  {{#if searchQuery }}
+    <div class="notification is-info">
+      Showing results for: "{{ searchQuery }}"
+    </div>
+  {{/if}}
+
   {{> list-pois}}
   {{> add-poi}}
 </section>

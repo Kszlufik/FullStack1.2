@@ -1,20 +1,38 @@
-<form class="box" action="/poi/{{poi._id}}/addmarker" method="POST">
+<form class="box" action="/poi/{{poi._id}}/addmarker" method="POST" enctype="multipart/form-data">
   <label>Enter Marker Details:</label>
   <div class="field is-horizontal">
     <div class="field-body">
       <div class="field">
-        <input class="input" type="text" placeholder="Enter Title" name="title">
+        <label class="label">Title</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Enter Title" name="title" required>
+        </div>
       </div>
       <div class="field">
-        <input class="input" type="text" placeholder="Enter Description" name="description">
+        <label class="label">Description</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="Enter Description" name="description" required>
+        </div>
       </div>
       <div class="field">
-        <input class="input" type="text" placeholder="Enter Latitude" name="latitude">
+        <label class="label">Latitude</label>
+        <div class="control">
+          <input class="input" type="number" step="any" placeholder="Enter Latitude" name="latitude" required>
+        </div>
       </div>
       <div class="field">
-        <input class="input" type="text" placeholder="Enter Longitude" name="longitude">
+        <label class="label">Longitude</label>
+        <div class="control">
+          <input class="input" type="number" step="any" placeholder="Enter Longitude" name="longitude" required>
+        </div>
       </div>
     </div>
   </div>
-  <button class="button is-primary">Add Marker</button>
+
+  
+  <div class="field">
+    <div class="control">
+      <button class="button is-primary" type="submit">Add Marker</button>
+    </div>
+  </div>
 </form>
