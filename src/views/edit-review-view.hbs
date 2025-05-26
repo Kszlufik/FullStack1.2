@@ -1,0 +1,55 @@
+{{!< main}}
+{{! this indicates that this template inherits from a "main" layout template. }}
+
+<h2 class="text-2xl font-semibold mb-4">Edit Your Review for "{{poi.title}}"</h2>
+{{! displays the title of the point of interest being reviewed}}
+
+<form action="/poi/{{poi._id}}/review/{{review._id}}/edit" method="POST" class="space-y-4">
+  {{! Form to edit a review submits via post to a route that includes POI and review IDs. }}
+
+  {{! rating selection dropdown }}
+  <div>
+    <label for="rating" class="block font-medium">Rating</label>
+    <select name="rating" id="rating" class="border rounded p-2 w-32">
+      {{! generates a dropdown with 5 star rating options (1-5 stars). }}
+      {{#each (times 5)}}
+        {{! for each iteration  creates an option: }}
+        <option 
+          value="{{add @index 1}}" 
+          {{! checks if the current option matches the review's existing rating}}
+          {{#ifCond (add @index 1) '===' ../review.rating}}selected{{/ifCond}}
+        >
+          {{! displays the star count}}
+          {{add @index 1}} Star{{#unless (eq (add @index 1) 1)}}s{{/unless}}
+        </option>
+      {{/each}}
+    </select>
+  </div>
+
+  {{! comment area }}
+  <div>
+    <label for="comment" class="block font-medium">Comment</label>
+    <textarea 
+      name="comment" 
+      id="comment" 
+      rows="4" 
+      class="border rounded p-2 w-full"
+    >{{review.comment}}</textarea>
+  </div>
+
+  {{! Form Buttons }}
+  <div class="flex gap-4">
+    <button 
+      type="submit" 
+      class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+    >
+      Update Review
+    </button>
+    <a 
+      href="/poi/{{poi._id}}" 
+      class="text-gray-600 hover:underline"
+    >
+      Cancel
+    </a>
+  </div>
+</form>

@@ -1,6 +1,8 @@
 import { assert } from "chai";
 import { db } from "../src/models/db.js";
 import { testPOIs, eiffelTower } from "./fixtures.js";
+import "../src/server.js";
+
 
 suite("POI Model tests", () => {
 

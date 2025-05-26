@@ -1,95 +1,88 @@
-import { db } from "../models/db.js"; // Import database utility
+import { db } from "../models/db.js";
 
 export const dashboardController = {
-  // Render the dashboard
   index: {
     handler: async function (request, h) {
-      const loggedInUser = request.auth.credentials; // Get logged-in user
-      const pois = await db.poiStore.getUserPOIs(loggedInUser._id); // Get pois for the user
-
-      const viewData = {
+      // Get the logged in user and their POIs
+      const loggedInUser = request.auth.credentials;
+      const userPOIs = await db.poiStore.getUserPOIs(loggedInUser._id);
+      return h.view("dashboard-view", {
         title: "Dashboard",
         user: loggedInUser,
-        pois: pois || [], // Pass POIs or empty array
-      };
-
-      return h.view("dashboard-view", viewData); // Render dashboard view
+        pois: userPOIs,
+      });
     },
   },
 
-  // Add a new POI
   addPOI: {
     handler: async function (request, h) {
-      const loggedInUser = request.auth.credentials; // Get logged-in user
+      // Create new POI from form data
+      const loggedInUser = request.auth.credentials;
       const newPOI = {
-        userId: loggedInUser._id, // Associate POI with user
+        userId: loggedInUser._id,
         title: request.payload.title,
-        category: request.payload.category,
         description: request.payload.description,
-        latitude: Number(request.payload.latitude), 
-        longitude: Number(request.payload.longitude), 
+        latitude: request.payload.latitude,
+        longitude: request.payload.longitude,
+        category: request.payload.category,
+        isPrivate: request.payload.isPrivate === "on", // checkbox handling
+        images: [], // empty arrays for future stuff
+        markers: [],
+        reviews: [],
       };
-
-      await db.poiStore.addPOI(newPOI); // Add POI to database
-      return h.redirect("/dashboard"); // Redirect to dashboard
+      // Save to DB and refresh dashboard
+      await db.poiStore.addPOI(newPOI);
+      return h.redirect("/dashboard");
     },
   },
 
-  // Delete a POI
   deletePOI: {
     handler: async function (request, h) {
-      await db.poiStore.deletePOI(request.params.id); // Delete POI by ID
-      return h.redirect("/dashboard"); // Redirect to dashboard
+      // Simple delete by ID
+      const poiId = request.params.id;
+      await db.poiStore.deletePOI(poiId);
+      return h.redirect("/dashboard");
     },
   },
 
-  // Search POIs
   searchPOIs: {
     handler: async function (request, h) {
       try {
-        const query = request.query.query; // Get search query
-        if (!query) {
-          // If no query, show error
-          const loggedInUser = request.auth.credentials;
-          const pois = await db.poiStore.getUserPOIs(loggedInUser._id);
+        const query = request.query.query;
+        const loggedInUser = request.auth.credentials;
 
-          const viewData = {
+        // Handle empty search
+        if (!query) {
+          const pois = await db.poiStore.getUserPOIs(loggedInUser._id);
+          return h.view("dashboard-view", {
             title: "Dashboard",
             user: loggedInUser,
-            pois: pois || [],
-            searchError: "Please enter a search term", // Error message
-          };
-
-          return h.view("dashboard-view", viewData); // Render dashboard with error
+            pois,
+            searchError: "Please enter a search term",
+          });
         }
 
-        // Perform search
-        const filteredPOIs = await db.poiStore.searchPOIs(query); // Search POIs
-        const loggedInUser = request.auth.credentials;
+        // Search with visibility filtering
+        const filteredPOIs = await db.poiStore.searchPOIs(query, loggedInUser._id);
 
-        const viewData = {
+        // Show results
+        return h.view("dashboard-view", {
           title: "Search Results",
           user: loggedInUser,
-          pois: filteredPOIs, 
-          searchQuery: query, 
-        };
-
-        return h.view("dashboard-view", viewData); // Render dashboard with results
+          pois: filteredPOIs,
+          searchQuery: query,
+        });
       } catch (error) {
+        // Error handling
         console.error("Search error:", error);
-
-        // Handle search error
         const loggedInUser = request.auth.credentials;
         const pois = await db.poiStore.getUserPOIs(loggedInUser._id);
-
-        const viewData = {
+        return h.view("dashboard-view", {
           title: "Dashboard",
           user: loggedInUser,
-          pois: pois || [],
-          searchError: "An error occurred while searching. Please try again.", 
-        };
-
-        return h.view("dashboard-view", viewData); 
+          pois,
+          searchError: "An error occurred while searching. Please try again.",
+        });
       }
     },
   },

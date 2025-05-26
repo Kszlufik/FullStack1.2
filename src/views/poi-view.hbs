@@ -8,8 +8,8 @@
   <p><strong>Location:</strong> {{poi.latitude}}, {{poi.longitude}}</p>
 
   <hr>
+
   
-  <h2>Please Upload POI Image Here</h2>
   {{#if poi.images.length}}
     <div class="columns is-multiline">
       {{#each poi.images}}
@@ -17,7 +17,7 @@
           <div class="card">
             <div class="card-image">
               <figure class="image is-4by3">
-                <img src="{{this}}" alt="Marker Image">
+                <img src="{{this}}" alt="POI Image">
               </figure>
             </div>
             <div class="card-content">
@@ -35,7 +35,7 @@
 
   <hr>
 
-  <h2>Upload a Marker Image</h2>
+  <h2>Upload POI image here</h2>
   <form action="/poi/{{poi._id}}/upload-image" method="POST" enctype="multipart/form-data">
     <div class="field">
       <label class="label">Image</label>
@@ -52,4 +52,91 @@
 
   {{> list-markers}}
   {{> add-marker}}
-  </section>
+
+  <hr>
+
+  <h2 class="subtitle">Reviews</h2>
+
+  {{#if poi.reviews.length}}
+    <div class="reviews-list">
+      {{#each poi.reviews}}
+        <div class="box">
+          <p>
+            <strong>Rating:</strong>
+            {{#times this.rating}}⭐{{/times}}
+            {{#times (subtract 5 this.rating)}}☆{{/times}}
+          </p>
+          <p><strong>Comment:</strong> {{this.comment}}</p>
+          <p><em>By: {{this.username}}</em></p>
+
+          {{#if (eq this.userId ../user.id)}}
+            {{#if (eq this._id ../editReviewId)}}
+              <form action="/poi/{{../poi._id}}/review/{{this._id}}/edit" method="POST">
+                <div class="field">
+                  <label class="label">Edit Rating</label>
+                  <div class="control">
+                    <div class="select">
+                      <select name="rating">
+                        {{#each ratingOptions}}
+                          <option value="{{this}}" {{#if (eq this ../this.rating)}}selected{{/if}}>{{this}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Edit Comment</label>
+                  <div class="control">
+                    <textarea name="comment" class="textarea">{{../this.comment}}</textarea>
+                  </div>
+                </div>
+                <div class="field">
+                  <button type="submit" class="button is-success is-small">Save</button>
+                </div>
+              </form>
+            {{else}}
+              <form action="/poi/{{../poi._id}}/review/{{this._id}}/edit" method="GET" style="display:inline;">
+                <button class="button is-info is-small">Edit</button>
+              </form>
+              <form action="/poi/{{../poi._id}}/review/{{this._id}}/delete" method="POST" style="display:inline;">
+                <button class="button is-danger is-small">Delete</button>
+              </form>
+            {{/if}}
+          {{/if}}
+        </div>
+      {{/each}}
+    </div>
+  {{else}}
+    <p>No reviews yet. Be the first to review!</p>
+  {{/if}}
+
+  <hr>
+
+  <h2 class="subtitle">Add a Review</h2>
+  <form action="/poi/{{poi._id}}/review" method="POST">
+    <div class="field">
+      <label class="label">Rating (1 to 5 stars)</label>
+      <div class="control">
+        <div class="select">
+          <select name="rating" required>
+            <option value="">Select rating</option>
+            {{#each ratingOptions}}
+              <option value="{{this}}">{{this}} star{{#if (gt this 1)}}s{{/if}}</option>
+            {{/each}}
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="label">Comment</label>
+      <div class="control">
+        <textarea name="comment" class="textarea" placeholder="Write your review here..." required></textarea>
+      </div>
+    </div>
+
+    <div class="field">
+      <button type="submit" class="button is-primary">Submit Review</button>
+    </div>
+  </form>
+</section>

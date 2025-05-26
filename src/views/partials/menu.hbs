@@ -1,14 +1,32 @@
+{{! main navigation bar at top of page }}
 <nav class="navbar">
+  
   <div class="navbar-brand">
-    {{> poi-brand}}
+    {{> poi-brand}} 
   </div>
+
+  {{! right side menu items }}
   <div class="navbar-menu" id="navMenu">
-    <div class="navbar-end">
+    <div class="navbar-end">  {{! pushes items to right side }}
       <div class="navbar-item">
         <div class="buttons">
-          <a id="dashboard" class="button" href="/dashboard">Dashboard</a>
-          <a id="about" class="button" href="/about">About</a>
-          <a id="logout" class="button" href="/logout">Logout</a>
+          
+          {{! main navigation buttons }}
+          <a id="dashboard" class="button" href="/dashboard">dashboard</a>
+          <a id="explore" class="button" href="/explore">explore</a>
+          <a id="about" class="button" href="/about">about</a>
+          <a id="discussions" class="button" href="/discussions">discussions</a>
+
+          {{! only show admin button if user is logged in AND is admin }}
+          {{#if user}}
+            {{#if (eq user.role "admin")}}
+              <a id="admin" class="button is-danger" href="/admin/users">admin</a>
+            {{/if}}
+          {{/if}}
+
+          {{! logout button - shows for all logged in users }}
+          <a id="logout" class="button" href="/logout">logout</a>
+          
         </div>
       </div>
     </div>

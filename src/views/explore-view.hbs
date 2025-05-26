@@ -1,0 +1,33 @@
+{{> menu active="explore"}}
+
+<section class="section">
+  <h1 class="title">Explore Public POIs</h1>
+
+  <div class="columns is-multiline">
+    {{#each pois}}
+      <div class="column is-one-third">
+        <div class="card">
+
+          {{#if images}}
+            {{#each images}}
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <img src="{{this}}" alt="POI Image">
+                </figure>
+              </div>
+            {{/each}}
+          {{/if}}
+
+          <div class="card-content">
+            <div class="content">
+              <p><strong>{{title}}</strong></p>
+              <p>Category: {{category}}</p>
+              <p>{{description}}</p>
+              <p>Location: {{latitude}}, {{longitude}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</section>

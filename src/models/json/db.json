@@ -5,105 +5,78 @@
       "lastName": "Simpson",
       "email": "homer@simpson.com",
       "password": "secret",
-      "_id": "de8a31d3-ba2a-401c-a4bc-63bd3364621b"
+      "_id": "2e4c996d-3a09-4b2e-9ddc-63cca798e0c0"
     },
     {
       "firstName": "Marge",
       "lastName": "Simpson",
       "email": "marge@simpson.com",
       "password": "secret",
-      "_id": "7ea547b6-4fef-431b-bb1e-6dc79daf5a22"
+      "_id": "33fc6db9-ebe5-403f-b9c9-6642076fa124"
     },
     {
       "firstName": "Bart",
       "lastName": "Simpson",
       "email": "bart@simpson.com",
       "password": "secret",
-      "_id": "4250906d-8391-4019-84a8-669aff343894"
+      "_id": "1d64c92f-052f-4cd5-a7af-ead0fa4f4e3b"
     },
     {
-      "firstName": "kamil",
-      "lastName": "szlufik",
-      "email": "ataner31@hotmail.com",
-      "password": "333",
-      "_id": "e2fb74f1-ca00-45f3-870f-707dcf988c70"
+      "firstName": "jojo",
+      "lastName": "jo",
+      "email": "jojo@jojo.ie",
+      "password": "$2b$10$up5EzhVNWVrbabE9jrYX0esXBFh.4X7hn4tRnIrB2.5hlRwmknroe",
+      "_id": "01f5414e-7396-49d2-8fc2-26531afb0cff"
     },
     {
-      "firstName": "kamil",
-      "lastName": "szlufik",
-      "email": "ataner31@hotmail.com",
-      "password": "111111",
-      "_id": "c20bb39d-547c-47e8-888b-506bdf842100"
+      "firstName": "lol",
+      "lastName": "lol",
+      "email": "lol@lol.ie",
+      "password": "$2b$10$aSe32ibg2xnkRuI9YtGFDOF7ik40bufbOSrP0tRXZscO7lqsRhJiC",
+      "_id": "a6d1ea04-ac61-4cb8-b535-87bdb598ea4e"
     },
     {
-      "firstName": "adam",
-      "lastName": "adam",
-      "email": "adam123@hotmail.com",
-      "password": "4321",
-      "_id": "67f1aa31-2a65-404f-9398-81f5ca875170"
+      "firstName": "11",
+      "lastName": "11",
+      "email": "11@11.ie",
+      "password": "$2b$10$e9ErIrsTKB4t9RnVNjbH9OJlfptYgs6q5NaBt65ph9vZG9dspC8aq",
+      "_id": "0b5b6330-6c9d-4294-a928-7a55089ba1b9"
     },
     {
-      "firstName": "joy",
-      "lastName": "joy",
-      "email": "joy123@hotmail.com",
-      "password": "123456",
-      "_id": "4d1a3fbe-9bae-4c25-a8ea-cf171b30fc6e"
+      "firstName": "aa",
+      "lastName": "aa",
+      "email": "aa@aa.ie",
+      "password": "$2b$10$eHFUDIbiVBhrZL0GeQHlvOlpwEfut9kBXBqiZRT5Le8f76B6X490K",
+      "_id": "055022be-3945-4d40-886d-ada0c18352d7"
     },
     {
-      "firstName": "tomy",
-      "lastName": "tomy",
-      "email": "tomy@123.ie",
-      "password": "1234",
-      "_id": "ff8def2c-1fc0-4c7f-a710-6967c726723d"
+      "firstName": "qq",
+      "lastName": "qq",
+      "email": "qq@qq.ie",
+      "password": "$2b$10$cKvh8khsA51nQ2O1uVS7oOhHZhv8QBcZN7xlp9mlDmj/hKx7LmyGy",
+      "_id": "46a82222-9a99-44f1-a0ed-bf07cb13875d"
     },
     {
-      "firstName": "limak",
-      "lastName": "kamil",
-      "email": "123@123.ie",
-      "password": "123",
-      "_id": "87152819-74ee-45dc-aaf3-5c0ace1fe44a"
-    },
-    {
-      "firstName": "lll",
-      "lastName": "lll",
-      "email": "lll@lll.ie",
-      "password": "123",
-      "_id": "1ffd6b1f-5e6c-4b4a-8ae4-a7b5cd150b3f"
-    },
-    {
-      "firstName": "kkk",
-      "lastName": "kkk",
-      "email": "kkk@kkk.ie",
-      "password": "123",
-      "_id": "2abf0ba5-c1d9-46be-9cea-e4b5a0adcf90"
-    },
-    {
-      "firstName": "manny",
-      "lastName": "tanny",
-      "email": "many@many.ie",
-      "password": "1234",
-      "_id": "00bdfae0-cff9-409d-a9bd-7e5ba9c62c74"
-    },
-    {
-      "firstName": "kamil",
-      "lastName": "szlufik",
-      "email": "ataner31@hotmail.com",
-      "password": "123",
-      "_id": "39c9c6c2-6636-4007-8c81-45def96d9347"
-    },
-    {
-      "firstName": "ll",
+      "_id": "1c5511df-45c1-4466-8d99-87c539c41992",
+      "firstName": "pp",
       "lastName": "pp",
-      "email": "ll@ll.ie",
-      "password": "123",
-      "_id": "f14bd45f-255b-42dd-87e9-f87a4f48739d"
+      "email": "pp@pp.ie",
+      "password": "$2b$10$clR4EuF/TLvxL/.OI9ndhO90QXqKHgIjgPO/n4lAcr/b0vEgAvKXC",
+      "role": "admin"
     },
     {
-      "firstName": "kamil",
-      "lastName": "limak",
-      "email": "limak@hotmail.com",
-      "password": "limak",
-      "_id": "f1830cd0-5461-43b6-b098-c6bd8830b9ed"
+      "_id": "64f3e842-f47c-43f7-8aa8-5edeeb5dfd30",
+      "firstName": "dd",
+      "lastName": "dd",
+      "email": "dd@dd.ie",
+      "password": "$2b$10$xyDYicZik/TRonUEULCI5.er7VraxdNxfSsNOhFo2gnXElRnExAjW"
+    },
+    {
+      "_id": "a1a0235f-2b34-434c-946e-8fd6be331863",
+      "firstName": "ss",
+      "lastName": "ss",
+      "email": "ss@ss.ie",
+      "password": "$2b$10$0.YCmv47MzAjp2BiPKFgnehyRGTp5BcqYM6SCAl3HHykh69Fs/lDC"
     }
   ],
   "pois": [
@@ -112,177 +85,86 @@
       "description": "A breathtaking natural wonder in Arizona",
       "latitude": 36.1069,
       "longitude": -112.1129,
-      "_id": "f2b254d5-e9b7-481d-b12c-9eeb51d673cd"
+      "_id": "1e5bb9eb-4acf-42d4-b02b-0bf6cbaa9b5f",
+      "images": [],
+      "markers": [],
+      "reviews": [],
+      "isPrivate": false
     },
     {
       "title": "Great Wall of China",
       "description": "Historic fortification in China",
       "latitude": 40.4319,
       "longitude": 116.5704,
-      "_id": "c7a420d6-589f-4ec2-8b78-b2a56764b6e1"
+      "_id": "0740bb05-80d2-42c9-ad12-3bd1c83f334a",
+      "images": [],
+      "markers": [],
+      "reviews": [],
+      "isPrivate": false
     },
     {
-      "userId": "4d1a3fbe-9bae-4c25-a8ea-cf171b30fc6e",
-      "title": "rome",
-      "description": "rome",
-      "latitude": 123,
-      "longitude": 321,
-      "_id": "8bd97e4c-395d-4138-bc70-de3e61ed8bb4"
-    },
-    {
-      "_id": "b0011292-69bc-43e6-9b58-2c4b0c08ffab",
-      "userId": "ff8def2c-1fc0-4c7f-a710-6967c726723d",
-      "title": "mountain",
-      "category": "Beach",
-      "description": "mountain in khygystan",
-      "latitude": 123,
-      "longitude": 123
-    },
-    {
-      "_id": "763fa427-0410-449f-ab8d-f2183494100d",
-      "userId": "ff8def2c-1fc0-4c7f-a710-6967c726723d",
-      "title": "beach",
-      "category": "Mountain",
-      "description": "beach",
-      "latitude": 321,
-      "longitude": 321,
-      "images": [
-        "/uploads/50dbce61-e2d8-43f9-aed0-ab13b3f051cf-Screenshot (16).png",
-        "/uploads/558ca5c6-0abe-4b6e-9af1-2326c91fa27d-Screenshot (17).png"
-      ]
-    },
-    {
-      "_id": "7ab46eb8-0484-4a95-805f-006ba192824e",
-      "userId": "ff8def2c-1fc0-4c7f-a710-6967c726723d",
-      "title": "museum",
-      "category": "Other",
-      "description": "museum in la",
-      "latitude": 111,
-      "longitude": 111
-    },
-    {
-      "_id": "1d9ed8db-8b7e-419b-bb40-0e2eaee0a0a4",
-      "userId": "ff8def2c-1fc0-4c7f-a710-6967c726723d",
-      "title": "beach in polan",
-      "category": "Beach",
-      "description": "beach in poland",
-      "latitude": 444,
-      "longitude": 444
-    },
-    {
-      "_id": "bb59a2bf-ca1b-4f69-b32b-8c896239a846",
-      "userId": "ff8def2c-1fc0-4c7f-a710-6967c726723d",
-      "title": "akropolis musemum",
-      "category": "Museum",
-      "description": "museum in acropolis",
-      "latitude": 111,
-      "longitude": 111
-    },
-    {
-      "userId": "87152819-74ee-45dc-aaf3-5c0ace1fe44a",
-      "title": "National War Museum",
-      "category": "Museum",
-      "description": "museum in greece ",
-      "latitude": 123,
-      "longitude": 123,
-      "_id": "d5808797-bbc2-4f80-baa5-325d99572fba"
-    },
-    {
-      "userId": "87152819-74ee-45dc-aaf3-5c0ace1fe44a",
-      "title": "Ballygowan",
-      "category": "Mountain",
-      "description": "mountain in ireland",
-      "latitude": 321,
-      "longitude": 321,
-      "_id": "882c6d54-2c5d-4212-8072-9d86e5e0fd03"
-    },
-    {
-      "userId": "1ffd6b1f-5e6c-4b4a-8ae4-a7b5cd150b3f",
-      "title": "Valley of terror",
-      "category": "Mountain",
-      "description": "vallye in the east eye of tumuli",
-      "latitude": 123,
-      "longitude": 123,
-      "_id": "2e4a93ab-a004-40cb-81f6-c31ba217b667"
-    },
-    {
-      "userId": "2abf0ba5-c1d9-46be-9cea-e4b5a0adcf90",
-      "title": "Mountain of Congo",
-      "category": "Mountain",
-      "description": "beautiful mountain in the heart of congo jungle",
-      "latitude": 123,
-      "longitude": 123,
-      "_id": "40175416-d93c-44ed-8dce-66e3ea53f64b"
-    },
-    {
-      "userId": "00bdfae0-cff9-409d-a9bd-7e5ba9c62c74",
-      "title": "The Ridge of Nebraska",
-      "category": "mountain",
-      "description": "a mountain in the province of Nebraska",
-      "latitude": 123.111,
-      "longitude": 111.123,
-      "_id": "62b882eb-8f9c-4a49-905a-0944b0fe1c78"
-    },
-    {
-      "userId": "f14bd45f-255b-42dd-87e9-f87a4f48739d",
-      "title": "mountain",
-      "category": "nature wonder",
-      "description": "mountain in ireland",
-      "latitude": 123,
-      "longitude": 123,
-      "_id": "133548c1-4ab4-47d5-b55d-f7f2f0a7cf7d"
-    },
-    {
-      "userId": "f1830cd0-5461-43b6-b098-c6bd8830b9ed",
-      "title": "madeira",
-      "category": "town ",
-      "description": "a town in the country of Portugal",
-      "latitude": 111,
-      "longitude": 111,
-      "_id": "2a04b91a-9c54-4977-8a3d-090493e5a8a8",
-      "images": [
-        "/uploads/ccf12662-6c34-4351-8cf8-ad69061b49d3-logo.jpg"
-      ]
-    },
-    {
-      "userId": "f1830cd0-5461-43b6-b098-c6bd8830b9ed",
-      "title": "disneyworld",
-      "category": "themepark",
-      "description": "adventure park",
-      "latitude": 321,
-      "longitude": 123,
-      "_id": "b5a1164f-847d-4244-b9c8-123899860e59",
-      "images": [
-        "/uploads/4cadf3db-b96b-481b-82f9-7d1f4c9817a0-Screenshot (16).png"
-      ],
-      "markers": [
-        {
-          "id": "cb4b4191-d8fa-4df3-92a3-8e672962ee0c",
-          "title": "marker",
-          "description": "marker",
-          "latitude": 123,
-          "longitude": 123,
-          "image": null
-        },
-        {
-          "id": "8bf097dd-ecb3-4d21-9551-8c7fa94f6da1",
-          "title": "poi",
-          "description": "poi",
-          "latitude": 123,
-          "longitude": 123,
-          "image": null
-        }
-      ]
+      "title": "Sydney Opera House",
+      "description": "Iconic performing arts center in Australia",
+      "latitude": -33.8568,
+      "longitude": 151.2153,
+      "_id": "5896aa03-3d7a-4a84-8b4a-e7af92386882",
+      "images": [],
+      "markers": [],
+      "reviews": [],
+      "isPrivate": false
     }
   ],
-  "markers": [
+  "discussions": [
     {
-      "title": "11",
-      "description": "@",
-      "latitude": "@",
-      "longitude": "@",
-      "_id": "1a99692b-125f-4fdf-888c-a3614f3a5975",
-      "poiId": "e2fefcf1-fd18-460b-81b0-1e81fb141b91"
+      "userId": "3c3678c8-f0f9-40cc-b7ad-b039703fe2e4",
+      "userName": "kamil",
+      "content": "this is my first post ",
+      "_id": "0304e9d9-2c54-4a01-ada1-f7bf9e272f90",
+      "replies": [
+        {
+          "userId": "3c3678c8-f0f9-40cc-b7ad-b039703fe2e4",
+          "userName": "kamil",
+          "content": "will this reply be seen",
+          "_id": "ed24daba-a195-4368-8a2a-9501936489df",
+          "timestamp": "2025-05-22T09:04:13.107Z",
+          "replies": [
+            {
+              "userId": "3c3678c8-f0f9-40cc-b7ad-b039703fe2e4",
+              "userName": "kamil",
+              "content": "hello its a reply",
+              "_id": "29007bb5-8fcb-4066-8710-c4e4b6a81b44",
+              "timestamp": "2025-05-22T09:32:30.775Z",
+              "replies": [
+                {
+                  "userId": "3c3678c8-f0f9-40cc-b7ad-b039703fe2e4",
+                  "userName": "kamil",
+                  "content": "and this reply ?",
+                  "_id": "29f16c82-5c89-4966-ac1c-ce99a14524e8",
+                  "timestamp": "2025-05-22T11:02:14.272Z",
+                  "replies": [
+                    {
+                      "userId": "3c3678c8-f0f9-40cc-b7ad-b039703fe2e4",
+                      "userName": "kamil",
+                      "content": "what about this one ?",
+                      "_id": "d9c988fe-a752-4015-8737-9582c2c8e19a",
+                      "timestamp": "2025-05-22T11:02:23.584Z"
+                    }
+                  ]
+                },
+                {
+                  "userId": "3c3678c8-f0f9-40cc-b7ad-b039703fe2e4",
+                  "userName": "kamil",
+                  "content": "second reply to the second reply ",
+                  "_id": "c4f66e12-e425-49ef-92a5-0bcf19641db4",
+                  "timestamp": "2025-05-22T11:02:32.935Z"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "timestamp": "2025-05-21T23:18:04.870Z"
     }
-  ]
+  ],
+  "markers": []
 }

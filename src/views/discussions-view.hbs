@@ -1,0 +1,55 @@
+{{> menu active="discussions"}}
+
+<section class="section">
+  <div class="container">
+    <h1 class="title has-text-centered">Discussions</h1>
+    
+<!-- form to create a new discussion thread -->
+    <form action="/discussions/add" method="POST" class="box">
+      <div class="field">
+        <label class="label">Start a new topic</label>
+        <div class="control">
+          <input class="input" type="text" name="title" placeholder="Discussion title" required>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <textarea class="textarea" name="content" placeholder="Write your message..." required></textarea>
+        </div>
+      </div>
+      <div class="field">
+        <div class="control">
+          <button class="button is-link">Post</button>
+        </div>
+      </div>
+    </form>
+
+    <!-- loop through and display discussions List -->
+    {{#each discussions}}
+      <div class="box mb-5">
+        <h2 class="title is-4">{{this.title}}</h2>
+        <p class="mb-4">{{this.content}}</p>
+
+        <!-- Recursive re render of  replies partial -->
+        {{> reply-thread replies=this.replies discussionIndex=@index }}
+
+        <!-- Reply form -->
+       <form action="/discussions/{{this._id}}/reply" method="POST" class="mt-4">
+          <div class="field">
+            <label class="label">Write a reply...</label>
+            <div class="control">
+              <textarea class="textarea" name="replyContent" placeholder="Your reply..." required></textarea>
+            </div>
+          </div>
+          <div class="control">
+            <button class="button is-info">Reply</button>
+          </div>
+        </form>
+      </div>
+    {{/each}}
+
+    {{#unless discussions.length}}
+      <div class="notification is-warning has-text-centered">No discussions yet. Start one above!</div>
+    {{/unless}}
+  </div>
+</section>

@@ -1,23 +1,55 @@
-<form action="/dashboard/addpoi" method="POST">
+<!-- Form for adding a new POI -->
+<form action="/dashboard/addpoi" method="POST" enctype="multipart/form-data">
+  
+  <!-- POI Title field -->
   <div class="field">
-    <label class="label">POI Title</label>
-    <input class="input" type="text" placeholder="Enter POI title" name="title" required>
+    <label class="label">Title</label>
+    <div class="control">
+      <input class="input" type="text" name="title" required>
+    </div>
   </div>
+
+  <!-- Category field -->
   <div class="field">
     <label class="label">Category</label>
-    <input class="input" type="text" placeholder="Enter Category" name="category" required>
+    <div class="control">
+      <input class="input" type="text" name="category" required>
+    </div>
   </div>
+
+  <!-- Description textarea -->
   <div class="field">
     <label class="label">Description</label>
-    <input class="input" type="text" placeholder="Enter POI description" name="description">
+    <div class="control">
+      <textarea class="textarea" name="description" required></textarea>
+    </div>
   </div>
+
+  <!-- Latitude field -->
   <div class="field">
     <label class="label">Latitude</label>
-    <input class="input" type="text" placeholder="Enter Latitude" name="latitude">
+    <div class="control">
+      <input class="input" type="number" step="any" name="latitude" required>
+    </div>
   </div>
+
+  <!-- Longitude field-->
   <div class="field">
     <label class="label">Longitude</label>
-    <input class="input" type="text" placeholder="Enter Longitude" name="longitude">
+    <div class="control">
+      <input class="input" type="number" step="any" name="longitude" required>
+    </div>
   </div>
-  <button class="button is-link">Add POI</button>
+
+  <!-- Privacy checkbox -->
+  <div class="field">
+    <label>
+      <input type="checkbox" name="isPrivate"> Make this POI private
+    </label>
+  </div>
+
+  <!-- Submit button -->
+  <div class="field">
+    <button class="button is-primary" type="submit">Add POI</button>
+  </div>
 </form>

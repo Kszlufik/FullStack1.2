@@ -1,19 +1,26 @@
+{{! navigation bar at the top of the page }}
 <nav class="navbar" role="navigation" aria-label="main navigation">
+  
+  {{! left side with logo/brand name }}
   <div class="navbar-brand">
-    {{> poi-brand}}
+    {{> poi-brand}}  {{! this inserts the brand/logo partial }}
   </div>
+
+  {{! right side menu items }}
   <div id="navbarBasicExample" class="navbar-menu">
-    <div class="navbar-end">
+    <div class="navbar-end">  {{! pushes items to right }}
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button" id="login" href="/login"> Log in </a>
-          <a class="button" id="signup" href="/signup"> Sign up </a>
+          {{! login button - goes to login page }}
+          <a class="button" id="login" href="/login"> log in </a>
+          
+          {{! signup button - goes to signup page }}
+          <a class="button" id="signup" href="/signup"> sign up </a>
         </div>
       </div>
     </div>
   </div>
 </nav>
-
 <script>
 
 </script>

@@ -1,7 +1,7 @@
-import { v4 } from "uuid"; // Import UUID for unique IDs
-import { markerMemStore } from "./marker-mem-store.js"; // Import marker store for related operations
+import { v4 } from "uuid";
+import { markerMemStore } from "./marker-mem-store.js";
 
-let pois = []; 
+let pois = [];
 
 export const poiMemStore = {
   // Get all POIs
@@ -12,37 +12,81 @@ export const poiMemStore = {
   // Add a new POI
   async addPOI(poi) {
     poi._id = v4();
-    pois.push(poi); 
+    poi.images = [];
+    poi.markers = [];
+    poi.reviews = [];
+    poi.isPrivate = !!poi.isPrivate; // Ensure boolean
+    pois.push(poi);
     return poi;
   },
 
-  // Get a playlist by ID 
-  async getPlaylistById(id) {
-    await db.read();
-    let list = db.data.playlists.find((playlist) => playlist._id === id);
-    if (list) {
-      list.tracks = await trackJsonStore.getTracksByPlaylistId(list._id);
-    } else {
-      list = null;
+  // Get POI by ID
+  async getPOIById(id) {
+    const poi = pois.find((poi) => poi._id === id);
+    if (poi) {
+      poi.markers = await markerMemStore.getMarkersByPOIId(poi._id);
+      return poi;
     }
-    return list;
+    return null;
   },
 
   // Get POIs by user ID
-  async getUserPOIs(userid) {
-    return pois.filter((poi) => poi.userid === userid); 
+  async getUserPOIs(userId) {
+    return pois.filter((poi) => poi.userId === userId);
   },
 
-  // Delete a playlist by ID 
-  async deletePlaylistById(id) {
-    await db.read();
-    const index = db.data.playlists.findIndex((playlist) => playlist._id === id);
-    if (index !== -1) db.data.playlists.splice(index, 1);
-    await db.write();
+  // Search POIs with visibility control
+  async searchPOIs(query, userId) {
+    const searchTerm = query.toLowerCase();
+    return pois.filter((poi) => {
+      const titleMatch = poi.title?.toLowerCase().includes(searchTerm);
+      const descriptionMatch = poi.description?.toLowerCase().includes(searchTerm);
+      const categoryMatch = poi.category?.toLowerCase().includes(searchTerm);
+      const matchesSearch = titleMatch || descriptionMatch || categoryMatch;
+      const isVisible = !poi.isPrivate || poi.userId === userId;
+      return matchesSearch && isVisible;
+    });
+  },
+
+  // Delete POI by ID
+  async deletePOIById(id) {
+    const index = pois.findIndex((poi) => poi._id === id);
+    if (index !== -1) pois.splice(index, 1);
   },
 
   // Delete all POIs
   async deleteAllPOIs() {
-    pois = []; 
+    pois = [];
+  },
+
+  // Get public POIs
+  async getPublicPOIs() {
+    return pois.filter((poi) => poi.isPrivate === false);
+  },
+
+  // Add review to POI
+  async addReviewToPOI(poiId, review) {
+    const poi = pois.find((p) => p._id === poiId);
+    if (poi) {
+      review._id = v4();
+      review.timestamp = new Date().toISOString();
+      poi.reviews = poi.reviews || [];
+      poi.reviews.push(review);
+    }
+  },
+
+  // Update POI
+  async updatePOI(id, updatedPOI) {
+    const poi = pois.find((p) => p._id === id);
+    if (poi) {
+      poi.title = updatedPOI.title;
+      poi.category = updatedPOI.category;
+      poi.description = updatedPOI.description;
+      poi.latitude = updatedPOI.latitude;
+      poi.longitude = updatedPOI.longitude;
+      poi.images = updatedPOI.images || [];
+      poi.markers = updatedPOI.markers || [];
+      poi.reviews = updatedPOI.reviews || poi.reviews || [];
+    }
   },
 };

@@ -1,0 +1,37 @@
+{{> menu active="admin" }}
+
+<section class="section">
+  <div class="container">
+    <h1 class="title">Admin: User Management</h1>
+    <!-- Users table -->
+    <table class="table is-fullwidth">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Role</th>
+          <th>Actions</th> {{! column for admin actions }}
+        </tr>
+      </thead>
+      <tbody>
+        {{#each users}}{{! Loop through all users and display name email and role, role will determine  access to admin page}}
+        <tr>
+          <td>{{this.firstName}} {{this.lastName}}</td>
+          <td>{{this.email}}</td>
+          <td>{{this.role}}</td>
+          <td>
+             {{! Prevent admin from deleting themselves }}
+            {{#unless (eq ../user._id this._id)}}
+              <form action="/admin/users/{{this._id}}/delete" method="POST">
+                <button class="button is-danger is-small">Delete</button>
+              </form>
+            {{else}}
+              <em>Index</em> {{! Indicator for current admin user }}
+            {{/unless}}
+          </td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</section>

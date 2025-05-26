@@ -19,11 +19,20 @@ export const markerJsonStore = {
   },
 
   // Get markers by POI ID
-  async getMarkersByPOIId(poiId) {
-    await db.read();
-    const foundMarkers = db.data.markers.filter((marker) => marker.poiId === poiId); 
-    return foundMarkers.length > 0 ? foundMarkers : null; 
-  },
+  async getPOIById(id) {
+  await db.read();
+  const poi = db.data.pois.find((poi) => poi._id === id) || null;
+  if (poi) {
+    const markers = await markerJsonStore.getMarkersByPOIId(id);
+    poi.markers = (markers || []).filter((m) => m != null);
+  }
+  return poi;
+},
+
+async getMarkersByPOIId(poiId) {
+  await db.read();
+  return (db.data.markers || []).filter((marker) => marker.poiId === poiId);
+},
 
   // Get a marker by ID
   async getMarkerById(id) {

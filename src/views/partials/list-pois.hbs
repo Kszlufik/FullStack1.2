@@ -1,7 +1,20 @@
-<ul>
+{{! this creates a row to hold all the poi cards }}
+<div class="row">
+  {{! loops through each poi in the pois array }}
   {{#each pois}}
-    <li>
-      <a href="/poi/{{this._id}}">{{this.title}} ({{this.category}})</a> 
-    </li>
+    {{! each poi gets a column that takes up 1/3 of the row on medium screens }}
+    <div class="col-md-4">
+      {{! card container with some spacing and shadow }}
+      <div class="card mb-3 shadow-sm">
+        <div class="card-body">
+          {{! poi title as card heading }}
+          <h5 class="card-title">{{this.title}}</h5>
+          {{! poi category }}
+          <p class="card-text">{{this.category}}</p>
+          {{! button to view this poi's details }}
+          <a href="/poi/{{this._id}}" class="btn btn-primary">view poi</a>
+        </div>
+      </div>
+    </div>
   {{/each}}
-</ul>
+</div>

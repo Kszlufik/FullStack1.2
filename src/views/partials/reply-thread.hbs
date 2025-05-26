@@ -1,0 +1,28 @@
+<ul class="ml-4">
+  {{#each replies}}
+    <li class="mb-2">
+      <div class="box">
+        <p>{{this.content}}</p>
+        {{#if this.userName}}<small>— {{this.userName}}</small>{{/if}}<br>
+        {{#if this.timestamp}}<small class="has-text-grey">{{this.timestamp}}</small>{{/if}}
+
+        <!-- Reply to this reply -->
+        <form action="/discussions/{{this._id}}/reply" method="POST" class="mt-2">
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <input class="input is-small" type="text" name="replyContent" placeholder="Reply to this reply..." required>
+            </div>
+            <div class="control">
+              <button class="button is-small is-info">Reply</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Recursive render if this reply has its own replies -->
+        {{#if this.replies.length}}
+          {{> reply-thread replies=this.replies discussionIndex=../discussionIndex }}
+        {{/if}}
+      </div>
+    </li>
+  {{/each}}
+</ul>
