@@ -10,24 +10,50 @@
           <th>Name</th>
           <th>Email</th>
           <th>Role</th>
-          <th>Actions</th> {{! column for admin actions }}
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        {{#each users}}{{! Loop through all users and display name email and role, role will determine  access to admin page}}
+        {{#each users}}
         <tr>
           <td>{{this.firstName}} {{this.lastName}}</td>
           <td>{{this.email}}</td>
-          <td>{{this.role}}</td>
           <td>
-             {{! Prevent admin from deleting themselves }}
-            {{#unless (eq ../user._id this._id)}}
-              <form action="/admin/users/{{this._id}}/delete" method="POST">
-                <button class="button is-danger is-small">Delete</button>
-              </form>
-            {{else}}
-              <em>Index</em> {{! Indicator for current admin user }}
-            {{/unless}}
+            <span class="tag {{#if (eq this.role 'admin')}}is-danger{{else}}is-light{{/if}}">
+              {{this.role}}
+            </span>
+          </td>
+          <td>
+            <div class="buttons">
+              {{#unless (eq this.role 'admin')}}
+                <form action="/admin/users/{{this._id}}/promote" method="POST">
+                  <button class="button is-success is-small" type="submit">
+                    <span class="icon">
+                      <i class="fas fa-user-shield"></i>
+                    </span>
+                    <span>Promote</span>
+                  </button>
+                </form>
+              {{/unless}}
+
+              {{#unless (eq ../user._id this._id)}}
+                <form action="/admin/users/{{this._id}}/delete" method="POST">
+                  <button class="button is-danger is-small" type="submit">
+                    <span class="icon">
+                      <i class="fas fa-trash"></i>
+                    </span>
+                    <span>Delete</span>
+                  </button>
+                </form>
+              {{else}}
+                <span class="tag is-info">
+                  <span class="icon">
+                    <i class="fas fa-user"></i>
+                  </span>
+                  <span>You</span>
+                </span>
+              {{/unless}}
+            </div>
           </td>
         </tr>
         {{/each}}

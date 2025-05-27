@@ -1,79 +1,112 @@
 {{> menu}}
 
 <section class="section">
-  <div class="title">
-    {{poi.title}}
+  {{!-- poi title and favorite button --}}
+  <div class="level">
+    <div class="level-left">
+      <div class="title">{{poi.title}}</div>
+    </div>
+    <div class="level-right">
+      <form action="/poi/{{poi._id}}/favorite" method="POST">
+        <button class="button is-small {{#if isFavorite}}is-danger{{else}}is-light{{/if}}" type="submit">
+          <span class="icon">
+            <i class="fas fa-heart"></i>
+          </span>
+          <span>{{#if isFavorite}}remove favorite{{else}}add favorite{{/if}}</span>
+        </button>
+      </form>
+    </div>
   </div>
+
+  {{!-- poi description and coordinates --}}
   <p>{{poi.description}}</p>
-  <p><strong>Location:</strong> {{poi.latitude}}, {{poi.longitude}}</p>
+  <p><strong>location:</strong> {{poi.latitude}}, {{poi.longitude}}</p>
 
   <hr>
 
-  
-  {{#if poi.images.length}}
-    <div class="columns is-multiline">
-      {{#each poi.images}}
-        <div class="column is-one-third">
-          <div class="card">
-            <div class="card-image">
-              <figure class="image is-4by3">
-                <img src="{{this}}" alt="POI Image">
-              </figure>
-            </div>
-            <div class="card-content">
-              <div class="content">
-                <p>POI Image</p>
+  {{!-- poi image gallery --}}
+  {{#if poi.images}}
+    {{#if poi.images.length}}
+      <div class="columns is-multiline">
+        {{#each poi.images}}
+          <div class="column is-one-third">
+            <div class="card">
+              <div class="card-image">
+                <figure class="image is-4by3">
+                  <img src="{{this}}" alt="poi image">
+                </figure>
+              </div>
+              <div class="card-content">
+                <div class="content">
+                  <p>poi image</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      {{/each}}
-    </div>
+        {{/each}}
+      </div>
+    {{else}}
+      <p>no marker poi uploaded yet.</p>
+    {{/if}}
   {{else}}
-    <p>No marker POI uploaded yet.</p>
+    <p>no marker poi uploaded yet.</p>
   {{/if}}
 
   <hr>
 
-  <h2>Upload POI image here</h2>
+  {{!-- image upload form --}}
+  <h2>upload poi image here</h2>
   <form action="/poi/{{poi._id}}/upload-image" method="POST" enctype="multipart/form-data">
     <div class="field">
-      <label class="label">Image</label>
+      <label class="label">image</label>
       <div class="control">
         <input type="file" name="image" accept="image/*">
       </div>
     </div>
     <div class="field">
       <div class="control">
-        <button class="button is-link" type="submit">Upload</button>
+        <button class="button is-link" type="submit">upload</button>
       </div>
     </div>
   </form>
 
+  {{!-- marker list and marker addition partials --}}
   {{> list-markers}}
   {{> add-marker}}
 
   <hr>
 
-  <h2 class="subtitle">Reviews</h2>
+  {{!-- map display --}}
+  <div class="box">
+    <h3 class="subtitle">location on map</h3>
+    <div id="map" style="height: 400px;"></div>
+  </div>
+  {{!-- #map container added to the poi view --}}
+
+  <hr>
+
+  {{!-- review list --}}
+  <h2 class="subtitle">reviews</h2>
 
   {{#if poi.reviews.length}}
     <div class="reviews-list">
       {{#each poi.reviews}}
         <div class="box">
           <p>
-            <strong>Rating:</strong>
+            <strong>rating:</strong>
             {{#times this.rating}}⭐{{/times}}
             {{#times (subtract 5 this.rating)}}☆{{/times}}
           </p>
-          <p><strong>Comment:</strong> {{this.comment}}</p>
-          <p><em>By: {{this.username}}</em></p>
+          <p><strong>comment:</strong> {{this.comment}}</p>
+          <p><em>by: {{this.username}}</em></p>
 
+          {{!-- show edit/delete if user owns the review --}}
           {{#if (eq this.userId ../user.id)}}
             {{#if (eq this._id ../editReviewId)}}
+              {{!-- review edit form --}}
               <form action="/poi/{{../poi._id}}/review/{{this._id}}/edit" method="POST">
                 <div class="field">
-                  <label class="label">Edit Rating</label>
+                  <label class="label">edit rating</label>
                   <div class="control">
                     <div class="select">
                       <select name="rating">
@@ -85,21 +118,22 @@
                   </div>
                 </div>
                 <div class="field">
-                  <label class="label">Edit Comment</label>
+                  <label class="label">edit comment</label>
                   <div class="control">
                     <textarea name="comment" class="textarea">{{../this.comment}}</textarea>
                   </div>
                 </div>
                 <div class="field">
-                  <button type="submit" class="button is-success is-small">Save</button>
+                  <button type="submit" class="button is-success is-small">save</button>
                 </div>
               </form>
             {{else}}
+              {{!-- review edit/delete buttons --}}
               <form action="/poi/{{../poi._id}}/review/{{this._id}}/edit" method="GET" style="display:inline;">
-                <button class="button is-info is-small">Edit</button>
+                <button class="button is-info is-small">edit</button>
               </form>
               <form action="/poi/{{../poi._id}}/review/{{this._id}}/delete" method="POST" style="display:inline;">
-                <button class="button is-danger is-small">Delete</button>
+                <button class="button is-danger is-small">delete</button>
               </form>
             {{/if}}
           {{/if}}
@@ -107,19 +141,20 @@
       {{/each}}
     </div>
   {{else}}
-    <p>No reviews yet. Be the first to review!</p>
+    <p>no reviews yet. be the first to review!</p>
   {{/if}}
 
   <hr>
 
-  <h2 class="subtitle">Add a Review</h2>
+  {{!-- add review form --}}
+  <h2 class="subtitle">add a review</h2>
   <form action="/poi/{{poi._id}}/review" method="POST">
     <div class="field">
-      <label class="label">Rating (1 to 5 stars)</label>
+      <label class="label">rating (1 to 5 stars)</label>
       <div class="control">
         <div class="select">
           <select name="rating" required>
-            <option value="">Select rating</option>
+            <option value="">select rating</option>
             {{#each ratingOptions}}
               <option value="{{this}}">{{this}} star{{#if (gt this 1)}}s{{/if}}</option>
             {{/each}}
@@ -129,14 +164,37 @@
     </div>
 
     <div class="field">
-      <label class="label">Comment</label>
+      <label class="label">comment</label>
       <div class="control">
-        <textarea name="comment" class="textarea" placeholder="Write your review here..." required></textarea>
+        <textarea name="comment" class="textarea" placeholder="write your review here..." required></textarea>
       </div>
     </div>
 
     <div class="field">
-      <button type="submit" class="button is-primary">Submit Review</button>
+      <button type="submit" class="button is-primary">submit review</button>
     </div>
   </form>
 </section>
+
+{{!-- map initialization script --}}
+<script>
+  // wait for the page to load
+  document.addEventListener('DOMContentLoaded', () => {
+    const initialLat = {{poi.latitude}} || 53.3498;
+    const initialLng = {{poi.longitude}} || -6.2603;
+
+    // create map
+    const map = L.map('map').setView([initialLat, initialLng], 13);
+
+    // add openstreetmap tiles
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">openstreetmap</a>'
+    }).addTo(map);
+
+    // add a marker for the poi
+    L.marker([initialLat, initialLng])
+      .addTo(map)
+      .bindPopup("{{poi.title}}");
+  });
+</script>
+{{!-- #map initialization script added --}}

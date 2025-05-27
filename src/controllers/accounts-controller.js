@@ -4,29 +4,32 @@ import { generateToken } from "../utils/jwt-utils.js";
 import bcrypt from "bcrypt";
 
 export const accountsController = {
+  // show homepage
   index: {
     auth: false,
     handler: function (request, h) {
-      return h.view("main", { title: "Welcome to POI Tracker" });
+      return h.view("main", { title: "welcome to poi tracker" });
     },
   },
 
+  // render signup form
   showSignup: {
     auth: false,
     handler: function (request, h) {
-      return h.view("signup-view", { title: "Sign up for POI Tracker" });
+      return h.view("signup-view", { title: "sign up for poi tracker" });
     },
   },
 
+  // handle user signup
   signup: {
     auth: false,
     validate: {
-      payload: UserSpec,
-      options: { abortEarly: false },
+      payload: UserSpec, // joi validation schema
+      options: { abortEarly: false }, // return all validation errors
       failAction: function (request, h, error) {
         return h
           .view("signup-view", {
-            title: "Sign up error",
+            title: "sign up error",
             errors: error.details,
           })
           .takeover()
@@ -40,36 +43,28 @@ export const accountsController = {
         password: request.payload.password.trim()
       };
 
-      console.log("Registration details:", {
-        email: user.email,
-        passwordLength: user.password.length,
-        charCodes: [...user.password].map(c => c.charCodeAt(0))
-      });
-
       try {
         const addedUser = await db.userStore.addUser(user);
-        console.log("User registered successfully:", {
-          email: addedUser.email,
-          hashPrefix: addedUser.password.substring(0, 10) + "..."
-        });
         return h.redirect("/");
       } catch (err) {
-        console.error("Registration failed:", err);
+        console.error("registration failed:", err);
         return h.view("signup-view", {
-          title: "Signup Error",
-          errors: [{ message: "Registration failed. Please try again." }]
+          title: "signup error",
+          errors: [{ message: "registration failed. please try again." }]
         }).takeover().code(500);
       }
     },
   },
 
+  // render login form
   showLogin: {
     auth: false,
     handler: function (request, h) {
-      return h.view("login-view", { title: "Login to POI Tracker" });
+      return h.view("login-view", { title: "login to poi tracker" });
     },
   },
 
+  // handle login attempt
   login: {
     auth: false,
     validate: {
@@ -78,7 +73,7 @@ export const accountsController = {
       failAction: function (request, h, error) {
         return h
           .view("login-view", {
-            title: "Login Error",
+            title: "login error",
             errors: error.details,
           })
           .takeover()
@@ -91,55 +86,40 @@ export const accountsController = {
         password: request.payload.password.trim()
       };
 
-      console.log("Login attempt:", { email, passwordLength: password.length });
-
       try {
         const user = await db.userStore.getUserByEmail(email);
         if (!user) {
-          console.log("User not found");
           return h.view("login-view", {
-            title: "Login Error",
-            errors: [{ message: "Invalid email or password" }],
+            title: "login error",
+            errors: [{ message: "invalid email or password" }],
           }).takeover().code(401);
         }
 
-        console.log("Retrieved user:", {
-          email: user.email,
-          hashPrefix: user.password.substring(0, 10) + "..."
-        });
-
-        // Debug comparison
+        // compare entered password with stored hash
         const match = await bcrypt.compare(password, user.password);
-        console.log("Password comparison result:", match);
 
         if (!match) {
-          // Emergency debug - compare hashes directly
-          const testHash = await bcrypt.hash(password, 10);
-          console.log("Emergency debug:", {
-            inputHash: testHash,
-            storedHash: user.password,
-            exactMatch: testHash === user.password
-          });
-
           return h.view("login-view", {
-            title: "Login Error",
-            errors: [{ message: "Invalid email or password" }],
+            title: "login error",
+            errors: [{ message: "invalid email or password" }],
           }).takeover().code(401);
         }
 
+        // store session using hapi's cookieauth
         request.cookieAuth.set({ id: user._id });
         return h.redirect("/dashboard");
 
       } catch (err) {
-        console.error("Login error:", err);
+        console.error("login error:", err);
         return h.view("login-view", {
-          title: "Login Error",
-          errors: [{ message: "Authentication failed. Please try again." }]
+          title: "login error",
+          errors: [{ message: "authentication failed. please try again." }]
         }).takeover().code(500);
       }
     },
   },
 
+  // handle logout by clearing cookie session
   logout: {
     handler: function (request, h) {
       request.cookieAuth.clear();
@@ -147,16 +127,22 @@ export const accountsController = {
     },
   },
 
+  // session validation for each request with auth
   async validate(request, session) {
     try {
       const user = await db.userStore.getUserById(session.id);
       if (!user) {
-        console.log("Invalid session for ID:", session.id);
         return { isValid: false };
       }
-      return { isValid: true, credentials: user };
+      return {
+        isValid: true,
+        credentials: {
+          ...user,
+          scope: user.role || 'user' // set default role if missing due to previous users not having a role
+        }
+      };
     } catch (err) {
-      console.error("Session validation error:", err);
+      console.error("session validation error:", err);
       return { isValid: false };
     }
   },

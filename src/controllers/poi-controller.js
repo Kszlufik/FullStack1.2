@@ -3,23 +3,28 @@ import path from "path";
 import { v4 as uuidv4 } from "uuid";
 import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
+import { poiJsonStore } from '../models/json/poi-json-store.js';
+import { userJsonStore } from '../models/json/user-json-store.js';
+
 
 export const poiController = {
-  // View a specific POI
-  viewPOI: {
-    handler: async function (request, h) {
-      const poi = await db.poiStore.getPOIById(request.params.id);
-      if (!poi) {
-        return Boom.notFound("POI not found");
-      }
-      return h.view("poi-view", {
-        poi,
-        ratingOptions: [1, 2, 3, 4, 5],
-      });
-    },
-  },
-
-  // Add a marker to a POI
+  //view a specific POI favourites included 
+viewPOI: {
+  auth: { strategy: "session" },
+  handler: async function(request, h) {
+    const poi = await poiJsonStore.getPOIById(request.params.id);
+    const userId = request.auth.credentials._id;
+    const user = await userJsonStore.getUserById(userId);
+    const isFavorite = user.favorites?.includes(poi._id);
+    
+    return h.view("poi-view", {
+      title: poi.name,
+      poi: poi,
+      isFavorite: isFavorite
+    });
+  }
+},
+  //dd a marker to a POI
   addMarker: {
     handler: async function (request, h) {
       try {
@@ -32,7 +37,7 @@ export const poiController = {
 
         let imageUrl = null;
 
-        // Handle image upload
+        //handle image upload
         if (image && image.hapi) {
           const filename = `${uuidv4()}-${image.hapi.filename}`;
           const uploadPath = path.join("public/uploads", filename);
@@ -48,7 +53,7 @@ export const poiController = {
           imageUrl = `/uploads/${filename}`;
         }
 
-        // Create and add marker
+        //create and add marker
         const newMarker = {
           id: uuidv4(),
           title,
@@ -69,7 +74,7 @@ export const poiController = {
     },
   },
 
-  // Delete a marker from a POI
+  //delete a marker from a POI
   deleteMarker: {
     handler: async function (request, h) {
       const poi = await db.poiStore.getPOIById(request.params.id);
@@ -81,7 +86,7 @@ export const poiController = {
     },
   },
 
-  // Upload image to a POI
+  //upload image to a POI
   uploadImage: {
     handler: async function (request, h) {
       try {
@@ -128,7 +133,7 @@ export const poiController = {
     },
   },
 
-  // Add a new POI
+  //add a new POI
   addPOI: {
     handler: async function (request, h) {
       try {
@@ -156,7 +161,7 @@ export const poiController = {
     },
   },
 
-  // Add a review to a POI
+  //add a review to a POI
   addReview: {
     handler: async function (request, h) {
       try {
@@ -193,7 +198,7 @@ export const poiController = {
       const poi = await db.poiStore.getPOIById(id);
       const review = poi?.reviews?.find(r => r._id === reviewid);
 
-      // Only allow user to edit their own review
+      //only allow user to edit their own review
       if (!review || review.userId !== request.auth.credentials.id) {
         return h.redirect(`/poi/${id}`);
       }
@@ -206,7 +211,7 @@ export const poiController = {
     }
   },
 
-  // Update a review
+  //update a review
   updateReview: {
     handler: async function (request, h) {
       const poiId = request.params.id;
@@ -221,7 +226,7 @@ export const poiController = {
 
       if (review.userId !== userId) return Boom.forbidden("You are not allowed to edit this review");
 
-      // Update review data
+      //pdate review data
       review.rating = Number(request.payload.rating);
       review.comment = request.payload.comment;
       await db.poiStore.updatePOI(poiId, poi);
@@ -230,7 +235,7 @@ export const poiController = {
     }
   },
 
-  // Delete a review
+  //delete a review
   deleteReview: {
     handler: async function (request, h) {
       const poiId = request.params.id;
@@ -238,7 +243,7 @@ export const poiController = {
       const poi = await db.poiStore.getPOIById(poiId);
       if (!poi) return Boom.notFound("POI not found");
 
-      // Only delete if review belongs to the current user
+      //only delete if review belongs to the current user
       const index = poi.reviews.findIndex(r => r._id === reviewId);
       if (index !== -1 && poi.reviews[index].userId === request.auth.credentials.id) {
         poi.reviews.splice(index, 1);

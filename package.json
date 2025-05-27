@@ -1,6 +1,6 @@
 {
-  "name": "playtime",
-  "version": "0.2.0",
+  "name": "poi",
+  "version": "3.11.0",
   "description": "POI application for all your travlling needs",
   "main": "src/server.js",
   "type": "module",

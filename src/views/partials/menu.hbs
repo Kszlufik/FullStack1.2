@@ -14,6 +14,17 @@
           {{! main navigation buttons }}
           <a id="dashboard" class="button" href="/dashboard">dashboard</a>
           <a id="explore" class="button" href="/explore">explore</a>
+          
+          {{! Favorites button - only shown when logged in }}
+          {{#if user}}
+            <a id="favorites" class="button is-primary" href="/favorites">
+              <span class="icon">
+                <i class="fas fa-heart"></i>
+              </span>
+              <span>favorites</span>
+            </a>
+          {{/if}}
+          
           <a id="about" class="button" href="/about">about</a>
           <a id="discussions" class="button" href="/discussions">discussions</a>
 

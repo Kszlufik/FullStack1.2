@@ -4,6 +4,7 @@ import { poiController } from "./controllers/poi-controller.js";
 import { exploreController } from "./controllers/explore-controller.js";
 import { discussionController } from "./controllers/discussion-controller.js";
 import { adminController } from "./controllers/admin-controller.js";
+import { favoritesController } from "./controllers/favorites-controller.js";
 
 export const webRoutes = [
   // Public auth routes
@@ -38,6 +39,7 @@ export const webRoutes = [
   { method: "GET", path: "/poi/{id}", config: poiController.viewPOI },
   { method: "GET", path: "/poi/{id}/deletemarker/{markerid}", config: poiController.deleteMarker },
 
+  // post route for images upload
   {
     method: "POST",
     path: "/poi/{id}/upload-image",
@@ -51,7 +53,7 @@ export const webRoutes = [
       },
     },
   },
-
+//post route for adding marker by poi ID
   {
     method: "POST",
     path: "/poi/{id}/addmarker",
@@ -79,6 +81,25 @@ export const webRoutes = [
       },
     },
   },
+// post route for promoting a simple user to admin by admin
+  {
+  method: "POST",
+  path: "/admin/users/{id}/promote",
+  config: adminController.promoteUser
+},
+//route for the favourites feature/toggle
+{
+  method: "POST",
+  path: "/poi/{id}/favorite",
+  config: favoritesController.toggleFavorite
+},
+
+//route for the favourites feature/list
+{
+  method: "GET",
+  path: "/favorites",
+  config: favoritesController.listFavorites
+},
 
   // Review routes
   { method: "POST", path: "/poi/{id}/review", config: poiController.addReview },
@@ -95,5 +116,6 @@ export const webRoutes = [
   { method: "GET", path: "/admin/users", config: adminController.usersPage },
   { method: "POST", path: "/admin/users/{id}/delete", config: adminController.deleteUser },
 
+  
 
 ];

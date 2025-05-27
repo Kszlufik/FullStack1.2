@@ -1,0 +1,34 @@
+{{!-- include main menu with "favorites" tab active --}}
+{{> menu active="favorites"}}
+
+<section class="section">
+  <div class="container">
+    {{!-- page title --}}
+    <h1 class="title">my favorite pois</h1>
+    
+    {{!-- check if there are any favorite pois --}}
+    {{#if pois.length}}
+      <div class="columns is-multiline">
+        {{!-- loop through each favorite poi --}}
+        {{#each pois}}
+          <div class="column is-one-third">
+            <div class="card">
+              <div class="card-content">
+                {{!-- poi name and description --}}
+                <h2 class="title is-4">{{name}}</h2>
+                <p>{{description}}</p>
+                {{!-- link to view poi details --}}
+                <a href="/poi/{{_id}}" class="button is-link is-small mt-3">view details</a>
+              </div>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    {{!-- message shown if no favorites exist --}}
+    {{else}}
+      <div class="notification is-info">
+        you haven't added any favorites yet!
+      </div>
+    {{/if}}
+  </div>
+</section>

@@ -1,82 +1,35 @@
 {
   "users": [
     {
-      "firstName": "Homer",
-      "lastName": "Simpson",
-      "email": "homer@simpson.com",
-      "password": "secret",
-      "_id": "2e4c996d-3a09-4b2e-9ddc-63cca798e0c0"
-    },
-    {
-      "firstName": "Marge",
-      "lastName": "Simpson",
-      "email": "marge@simpson.com",
-      "password": "secret",
-      "_id": "33fc6db9-ebe5-403f-b9c9-6642076fa124"
-    },
-    {
-      "firstName": "Bart",
-      "lastName": "Simpson",
-      "email": "bart@simpson.com",
-      "password": "secret",
-      "_id": "1d64c92f-052f-4cd5-a7af-ead0fa4f4e3b"
-    },
-    {
-      "firstName": "jojo",
-      "lastName": "jo",
-      "email": "jojo@jojo.ie",
-      "password": "$2b$10$up5EzhVNWVrbabE9jrYX0esXBFh.4X7hn4tRnIrB2.5hlRwmknroe",
-      "_id": "01f5414e-7396-49d2-8fc2-26531afb0cff"
-    },
-    {
-      "firstName": "lol",
-      "lastName": "lol",
-      "email": "lol@lol.ie",
-      "password": "$2b$10$aSe32ibg2xnkRuI9YtGFDOF7ik40bufbOSrP0tRXZscO7lqsRhJiC",
-      "_id": "a6d1ea04-ac61-4cb8-b535-87bdb598ea4e"
-    },
-    {
-      "firstName": "11",
-      "lastName": "11",
-      "email": "11@11.ie",
-      "password": "$2b$10$e9ErIrsTKB4t9RnVNjbH9OJlfptYgs6q5NaBt65ph9vZG9dspC8aq",
-      "_id": "0b5b6330-6c9d-4294-a928-7a55089ba1b9"
-    },
-    {
-      "firstName": "aa",
-      "lastName": "aa",
-      "email": "aa@aa.ie",
-      "password": "$2b$10$eHFUDIbiVBhrZL0GeQHlvOlpwEfut9kBXBqiZRT5Le8f76B6X490K",
-      "_id": "055022be-3945-4d40-886d-ada0c18352d7"
-    },
-    {
-      "firstName": "qq",
-      "lastName": "qq",
-      "email": "qq@qq.ie",
-      "password": "$2b$10$cKvh8khsA51nQ2O1uVS7oOhHZhv8QBcZN7xlp9mlDmj/hKx7LmyGy",
-      "_id": "46a82222-9a99-44f1-a0ed-bf07cb13875d"
-    },
-    {
       "_id": "1c5511df-45c1-4466-8d99-87c539c41992",
       "firstName": "pp",
       "lastName": "pp",
       "email": "pp@pp.ie",
       "password": "$2b$10$clR4EuF/TLvxL/.OI9ndhO90QXqKHgIjgPO/n4lAcr/b0vEgAvKXC",
-      "role": "admin"
+      "role": "admin",
+      "favorites": []
     },
     {
       "_id": "64f3e842-f47c-43f7-8aa8-5edeeb5dfd30",
       "firstName": "dd",
       "lastName": "dd",
       "email": "dd@dd.ie",
-      "password": "$2b$10$xyDYicZik/TRonUEULCI5.er7VraxdNxfSsNOhFo2gnXElRnExAjW"
+      "password": "$2b$10$xyDYicZik/TRonUEULCI5.er7VraxdNxfSsNOhFo2gnXElRnExAjW",
+      "role": "admin"
     },
     {
-      "_id": "a1a0235f-2b34-434c-946e-8fd6be331863",
-      "firstName": "ss",
-      "lastName": "ss",
-      "email": "ss@ss.ie",
-      "password": "$2b$10$0.YCmv47MzAjp2BiPKFgnehyRGTp5BcqYM6SCAl3HHykh69Fs/lDC"
+      "_id": "4dc4cc17-d627-4e00-947a-4aa24b9a3105",
+      "firstName": "yy",
+      "lastName": "yy",
+      "email": "yy@yy.ie",
+      "password": "$2b$10$azGWxgNmqo7Eann6DGiLsuASZ5JH2etc.c/RwUDr3sBRUlr5JsORi"
+    },
+    {
+      "_id": "21da04bc-0a12-4977-a170-dba320130b32",
+      "firstName": "uu",
+      "lastName": "uu",
+      "email": "uu@uu.ie",
+      "password": "$2b$10$bfi3leAYdlJ/ApsViXYe..N7Vvjcol.wDH48/SFbo6zpJHeDTUpfS"
     }
   ],
   "pois": [
@@ -112,6 +65,41 @@
       "markers": [],
       "reviews": [],
       "isPrivate": false
+    },
+    {
+      "userId": "1c5511df-45c1-4466-8d99-87c539c41992",
+      "title": "national park",
+      "description": "irish national park",
+      "latitude": "123",
+      "longitude": "123",
+      "category": "park",
+      "isPrivate": false,
+      "images": [],
+      "markers": [],
+      "reviews": [
+        {
+          "_id": "7d8578b8-30ac-40e0-bd5f-2ad4af6ba84b",
+          "userId": "1c5511df-45c1-4466-8d99-87c539c41992",
+          "username": "pp pp",
+          "rating": 2,
+          "comment": "great spot\r\n",
+          "createdAt": "2025-05-27T00:11:34.996Z"
+        }
+      ],
+      "_id": "45d4bd98-f330-439a-9bda-91e659e35267"
+    },
+    {
+      "userId": "1c5511df-45c1-4466-8d99-87c539c41992",
+      "title": "qqeqe",
+      "description": "eqeqe",
+      "latitude": "123",
+      "longitude": "321",
+      "category": "eqeq",
+      "isPrivate": false,
+      "images": [],
+      "markers": [],
+      "reviews": [],
+      "_id": "0a97c3b0-9296-46b8-ad52-e03959fb7646"
     }
   ],
   "discussions": [

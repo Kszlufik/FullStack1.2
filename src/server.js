@@ -1,23 +1,22 @@
-import Vision from "@hapi/vision";
-import Inert from "@hapi/inert";
-import Hapi from "@hapi/hapi";
-import Cookie from "@hapi/cookie";
-import Jwt from "hapi-auth-jwt2";
+import Vision from "@hapi/vision"; //view support
+import Inert from "@hapi/inert"; //file handling
+import Hapi from "@hapi/hapi"; //hapi server core
+import Cookie from "@hapi/cookie"; //Cookie auth
+import Jwt from "hapi-auth-jwt2"; //jWT auth
 import path from "path";
 import { fileURLToPath } from "url";
-import Handlebars from "handlebars";
+import Handlebars from "handlebars"; //template engine
 import { webRoutes } from "./web-routes.js";
 import { apiRoutes } from "./routes/api-routes.js";
 import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
-import dotenv from "dotenv";
-import Joi from "joi";
-import bcrypt from "bcrypt";
+import dotenv from "dotenv"; //load .env vars
+import Joi from "joi"; //validation
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Load environment variables
+//load environment variables
 const result = dotenv.config();
 if (result.error) {
   console.log(result.error.message);
@@ -29,11 +28,11 @@ async function init() {
     port: process.env.PORT || 3000,
   });
 
-  // Register plugins
+  //register plugins
   await server.register([Vision, Inert, Cookie, Jwt]);
   server.validator(Joi);
 
-  // Register Handlebars helpers
+  //register handlebars helpers
   Handlebars.registerHelper("times", function (n, block) {
     let result = "";
     for (let i = 0; i < n; ++i) {
@@ -46,7 +45,7 @@ async function init() {
   Handlebars.registerHelper("eq", (a, b) => a === b);
   Handlebars.registerHelper("gt", (a, b) => a > b);
 
-  // Configure view engine
+  //configure handlebars view engine
   server.views({
     engines: { hbs: Handlebars },
     relativeTo: __dirname,
@@ -57,14 +56,14 @@ async function init() {
     isCached: false,
   });
 
-  // JWT Strategy (for API routes)
+  //jWT authentication for API
   server.auth.strategy("jwt", "jwt", {
     key: process.env.JWT_SECRET || "default-secret-min-32-chars-123456789012",
     validate: async (decoded) => {
       const user = await db.userStore.getUserById(decoded.id);
       if (!user) return { isValid: false };
-      return { 
-        isValid: true, 
+      return {
+        isValid: true,
         credentials: {
           id: user._id,
           email: user.email,
@@ -75,24 +74,24 @@ async function init() {
     verifyOptions: { algorithms: ["HS256"] }
   });
 
-  // session strategyfor web routes - cookies
+  //session strategy for web routes
   server.auth.strategy("session", "cookie", {
     cookie: {
       name: "playtime",
       password: process.env.COOKIE_PASSWORD || "32-char-cookie-password-required-here-123",
       isSecure: process.env.NODE_ENV === "production",
-      ttl: 24 * 60 * 60 * 1000, 
+      ttl: 24 * 60 * 60 * 1000,
       path: "/",
-      encoding: "iron" // Added for better cookie encoding
+      encoding: "iron"
     },
     redirectTo: "/login",
     validate: accountsController.validate
   });
 
-  // Set default auth strategy
+  //set default auth strategy
   server.auth.default("session");
 
-  // Static files
+  //serve static files from /public
   server.route({
     method: "GET",
     path: "/public/{param*}",
@@ -104,44 +103,7 @@ async function init() {
     },
   });
 
-  // Debug routes
-  server.route({
-    method: "GET",
-    path: "/verify-hash/{email}",
-    handler: async (request) => {
-      const user = await db.userStore.getUserByEmail(request.params.email);
-      if (!user) return { error: "User not found" };
-      
-      return {
-        storedHash: user.password,
-        length: user.password.length,
-        validStructure: user.password.startsWith("$2b$"),
-        matchesTest: await bcrypt.compare("123", user.password) // Test with common password
-      };
-    }
-  });
-
-  server.route({
-    method: "POST",
-    path: "/debug-compare",
-    handler: async (request) => {
-      const { email, password } = request.payload;
-      const user = await db.userStore.getUserByEmail(email);
-      
-      if (!user) return { error: "User not found" };
-      
-      return {
-        input: password,
-        storedHash: user.password,
-        lengthMatch: password.length === password.length,
-        charCodes: [...password].map(c => c.charCodeAt(0)),
-        comparison: await bcrypt.compare(password, user.password),
-        hardcodedMatch: await bcrypt.compare("123", user.password)
-      };
-    }
-  });
-
-  // Clear cookies route
+  //clear session cookie route
   server.route({
     method: "GET",
     path: "/clear-cookies",
@@ -151,21 +113,22 @@ async function init() {
     }
   });
 
-  // Initialize database
+  //initialize data store
   db.init("json");
 
-  // Register all routes
+  //register app routes
   server.route(webRoutes);
   server.route(apiRoutes);
 
-  // Start server
+  //start server
   await server.start();
   console.log("Server running on %s", server.info.uri);
 }
 
+//global error handler
 process.on("unhandledRejection", (err) => {
   console.error("Unhandled rejection:", err);
   process.exit(1);
 });
 
-init();
+init(); // Launch server

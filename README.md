@@ -14,7 +14,21 @@ Add Markers to POIs (Latitude/Longitude)
 
 Upload Images for POIs
 
-Session-Based Authentication using Hapi.js Cookies
+Add to POI to Favourites
+
+ADD a review
+
+Leave a rating
+
+Check public POIs from any account
+
+Ability to access admin page promote/delete users. 
+
+see the map on the POI.
+
+Session-Based Authentication using JWT strategy 
+
+Hashing and Salting passwords 
 
 Technologies Used
 
@@ -24,7 +38,7 @@ Frontend: Handlebars.js, Bulma CSS
 
 File Uploads: Multipart handling with Hapi.js
 
-Authentication: Cookie-based session authentication
+Authentication: JWT based autentication
 
 Installation Guide
 
@@ -88,6 +102,18 @@ Add Markers: Users can add latitude & longitude markers to their POIs.
 
 Upload Images: Each POI supports image uploads.
 
+Add POI to favourites we can now add favourite POI and display it in the favourites view.
+
+Leave a review users can now leave a review on a POI 
+
+you can now leave a star rating also to give us a little idea of how much you enjoyed the POI
+
+Discussions tab is also open. LEave a comment and engage with others chat over natre, trails and points of interest.
+
+make your pois visible to others or not by using make public feature.
+
+If y ou have an admin privilage promote or delete other users. 
+
 File Uploads
 
 Allowed File Types: JPEG, PNG, GIF
@@ -109,5 +135,32 @@ Enhanced UI/UX: Improve styling and user experience.
 Add weather API so users can see the weather of the given region
 
 Add maps api so users can place markers manually.
+
+
+
+---
+
+## 💻 Getting Started
+
+### Prerequisites
+
+- Node.js v16+ installed
+- npm (Node package manager)
+
+### Installation
+
+1. Clone the repo
+
+```bash
+git clone https://github.com/your-username/playtime.git
+
+npm install
+
+set up .env file at the root and use this inside :
+PORT=3000
+COOKIE_PASSWORD=your-secure-cookie-password
+JWT_SECRET=your-secure-jwt-secret
+npm start
+
 
 

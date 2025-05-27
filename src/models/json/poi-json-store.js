@@ -2,14 +2,14 @@ import { v4 } from "uuid";
 import { db } from "./store-utils.js";
 import { markerJsonStore } from "./marker-json-store.js";
 
-// This handles all the point of interest stuff
+//This handles all the point of interest stuff
 export const poiJsonStore = {
   async getAllPOIs() {
     await db.read();
     return db.data.pois || [];
   },
 
-  // Add new POI
+  //add new POI
   async addPOI(poi) {
     await db.read();
     poi._id = v4(); // Give it an ID
@@ -17,7 +17,7 @@ export const poiJsonStore = {
     poi.markers = [];
     poi.reviews = [];
     
-    // Make sure isPrivate is true/false
+    //make sure isPrivate is true/false
     poi.isPrivate = !!poi.isPrivate;
 
     db.data.pois.push(poi);
@@ -25,7 +25,7 @@ export const poiJsonStore = {
     return poi;
   },
 
-  // Get POI by ID
+  //get POI by ID
   async getPOIById(id) {
     await db.read();
     const poi = db.data.pois.find((poi) => poi._id === id) || null;
@@ -37,31 +37,31 @@ export const poiJsonStore = {
     return poi;
   },
 
-  // Get POIs by user
+  // get POIs by user
   async getUserPOIs(userId) {
     await db.read();
     return db.data.pois.filter((poi) => poi.userId === userId) || [];
   },
 
-  // Search POIs
+  //search POIs
   async searchPOIs(query, userId) {
     await db.read();
     const searchTerm = query.toLowerCase();
     return db.data.pois.filter((poi) => {
-      // Check if matches search
+      //check if matches search
       const titleMatch = poi.title?.toLowerCase().includes(searchTerm);
       const descriptionMatch = poi.description?.toLowerCase().includes(searchTerm);
       const categoryMatch = poi.category?.toLowerCase().includes(searchTerm);
       const matchesSearch = titleMatch || descriptionMatch || categoryMatch;
       
-      // Check visibility
+      //check visibility
       const isVisible = !poi.isPrivate || poi.userId === userId;
       
       return matchesSearch && isVisible;
     });
   },
 
-  // Delete POI
+  //delete POI
   async deletePOIById(id) {
     await db.read();
     const index = db.data.pois.findIndex((poi) => poi._id === id);
@@ -71,19 +71,19 @@ export const poiJsonStore = {
     }
   },
 
-  // Delete all POIs
+  //delete all pOIs
   async deleteAllPOIs() {
     db.data.pois = [];
     await db.write();
   },
 
-  // Get public POIs only
+  //get public pOIs only
   async getPublicPOIs() {
     await db.read();
     return db.data.pois.filter((poi) => poi.isPrivate === false);
   },
 
-  // Add review to POI
+  //add review to POI
   async addReviewToPOI(poiId, review) {
     await db.read();
     const poi = db.data.pois.find((p) => p._id === poiId);
@@ -96,12 +96,12 @@ export const poiJsonStore = {
     }
   },
 
-  // Update POI info
+  //update POI info
   async updatePOI(id, updatedPOI) {
     await db.read();
     const poi = db.data.pois.find((p) => p._id === id);
     if (poi) {
-      // Update all the fields
+      //update all the fields
       poi.title = updatedPOI.title;
       poi.category = updatedPOI.category;
       poi.description = updatedPOI.description;

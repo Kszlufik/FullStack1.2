@@ -4,13 +4,42 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{title}}</title>
+    <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <!-- Font Awesome -->
     <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js"></script>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""/>
+    <!-- Custom Styles -->
+    <style>
+      #map { 
+        height: 400px; 
+        margin: 1rem 0;
+        border-radius: 8px;
+        border: 1px solid #ddd;
+      }
+      .leaflet-container { 
+        z-index: 0; /* Ensures map stays behind other elements */
+      }
+      .map-coordinates {
+        background: white;
+        padding: 5px 10px;
+        border-radius: 4px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        margin-top: 10px;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
       {{{content}}}
       {{> error }}
     </div>
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""></script>
   </body>
 </html>
