@@ -14,6 +14,7 @@ export const webRoutes = [
   { method: "GET", path: "/logout", config: accountsController.logout },
   { method: "POST", path: "/register", config: accountsController.signup },
   { method: "POST", path: "/authenticate", config: accountsController.login },
+  
 
   // Dashboard routes (session-based access)
   { method: "GET", path: "/dashboard", config: dashboardController.index },
@@ -37,7 +38,8 @@ export const webRoutes = [
 
   // POI detail & marker routes
   { method: "GET", path: "/poi/{id}", config: poiController.viewPOI },
-  { method: "GET", path: "/poi/{id}/deletemarker/{markerid}", config: poiController.deleteMarker },
+ { method: "GET", path: "/poi/{id}/deletemarker/{markerid}", config: poiController.deleteMarker },
+
 
   // post route for images upload
   {

@@ -75,7 +75,17 @@
       "category": "park",
       "isPrivate": false,
       "images": [],
-      "markers": [],
+      "markers": [
+        {
+          "title": "tree",
+          "description": "old tree",
+          "latitude": 123,
+          "longitude": 123,
+          "image": null,
+          "_id": "4d344dd7-ccb9-413a-a3cd-4cbf11a8257e",
+          "poiId": "45d4bd98-f330-439a-9bda-91e659e35267"
+        }
+      ],
       "reviews": [
         {
           "_id": "7d8578b8-30ac-40e0-bd5f-2ad4af6ba84b",

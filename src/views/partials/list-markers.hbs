@@ -24,8 +24,10 @@
         <td>{{latitude}}</td>
         <td>{{longitude}}</td>
         <td>
-          {{! delete button with icon }}
-          <a href="/poi/{{../poi._id}}/deletemarker/{{_id}}" class="ui icon button">
+          {{! delete button with icon we use get request }}
+          <a href="/poi/{{../poi._id}}/deletemarker/{{_id}}" 
+             class="ui icon button" 
+             onclick="return confirm('Are you sure you want to delete this marker?');">
             <i class="fas fa-trash"></i> 
           </a>
         </td>

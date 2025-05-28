@@ -5,7 +5,10 @@ import Boom from "@hapi/boom";
 import { db } from "../models/db.js";
 import { poiJsonStore } from '../models/json/poi-json-store.js';
 import { userJsonStore } from '../models/json/user-json-store.js';
+import { markerJsonStore } from "../models/json/marker-json-store.js";
 
+
+console.log("MarkerJsonStore:", markerJsonStore); 
 
 export const poiController = {
   //view a specific POI favourites included 
@@ -26,65 +29,66 @@ viewPOI: {
 },
   //dd a marker to a POI
   addMarker: {
-    handler: async function (request, h) {
-      try {
-        const poi = await db.poiStore.getPOIById(request.params.id);
-        if (!poi) return Boom.notFound("POI not found");
-
-        poi.markers = poi.markers || [];
-
-        const { title, description, latitude, longitude, image } = request.payload;
-
-        let imageUrl = null;
-
-        //handle image upload
-        if (image && image.hapi) {
-          const filename = `${uuidv4()}-${image.hapi.filename}`;
-          const uploadPath = path.join("public/uploads", filename);
-          if (!fs.existsSync("public/uploads")) fs.mkdirSync("public/uploads", { recursive: true });
-
-          const fileStream = fs.createWriteStream(uploadPath);
-          await new Promise((resolve, reject) => {
-            image.pipe(fileStream);
-            image.on("end", resolve);
-            image.on("error", reject);
-          });
-
-          imageUrl = `/uploads/${filename}`;
-        }
-
-        //create and add marker
-        const newMarker = {
-          id: uuidv4(),
-          title,
-          description,
-          latitude: Number(latitude),
-          longitude: Number(longitude),
-          image: imageUrl,
-        };
-
-        poi.markers.push(newMarker);
-        await db.poiStore.updatePOI(poi._id, poi);
-
-        return h.redirect(`/poi/${poi._id}`);
-      } catch (error) {
-        console.error("Error adding marker:", error);
-        return Boom.badImplementation("An error occurred while adding the marker.");
-      }
-    },
-  },
-
-  //delete a marker from a POI
-  deleteMarker: {
-    handler: async function (request, h) {
+  handler: async function (request, h) {
+    try {
       const poi = await db.poiStore.getPOIById(request.params.id);
       if (!poi) return Boom.notFound("POI not found");
 
-      poi.markers = poi.markers.filter(marker => marker.id !== request.params.markerid);
-      await db.poiStore.updatePOI(poi._id, poi);
+      const { title, description, latitude, longitude, image } = request.payload;
+      let imageUrl = null;
+
+      if (image && image.hapi) {
+        const filename = `${uuidv4()}-${image.hapi.filename}`;
+        const uploadPath = path.join("public/uploads", filename);
+        if (!fs.existsSync("public/uploads")) fs.mkdirSync("public/uploads", { recursive: true });
+
+        const fileStream = fs.createWriteStream(uploadPath);
+        await new Promise((resolve, reject) => {
+          image.pipe(fileStream);
+          image.on("end", resolve);
+          image.on("error", reject);
+        });
+
+        imageUrl = `/uploads/${filename}`;
+      }
+
+      const newMarker = {
+        title,
+        description,
+        latitude: Number(latitude),
+        longitude: Number(longitude),
+        image: imageUrl,
+      };
+
+      await markerJsonStore.addMarker(poi._id, newMarker); 
+
       return h.redirect(`/poi/${poi._id}`);
-    },
+    } catch (error) {
+      console.error("Error adding marker:", error);
+      return Boom.badImplementation("An error occurred while adding the marker.");
+    }
   },
+},
+
+
+  //delete a marker from a POI
+deleteMarker: {
+  handler: async function (request, h) {
+    const poiId = request.params.id;
+    const markerId = request.params.markerid;
+
+    const poi = await db.poiStore.getPOIById(poiId);
+    if (!poi) {
+      return Boom.notFound("POI not found");
+    }
+
+    await markerJsonStore.deleteMarker(markerId);
+
+    
+    return h.redirect(`/poi/${poiId}`);
+  }
+},
+
 
   //upload image to a POI
   uploadImage: {
