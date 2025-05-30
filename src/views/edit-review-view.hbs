@@ -5,15 +5,12 @@
 {{! displays the title of the point of interest being reviewed}}
 
 <form action="/poi/{{poi._id}}/review/{{review._id}}/edit" method="POST" class="space-y-4">
-  {{! Form to edit a review submits via post to a route that includes POI and review IDs. }}
-
   {{! rating selection dropdown }}
   <div>
     <label for="rating" class="block font-medium">Rating</label>
     <select name="rating" id="rating" class="border rounded p-2 w-32">
       {{! generates a dropdown with 5 star rating options (1-5 stars). }}
       {{#each (times 5)}}
-        {{! for each iteration  creates an option: }}
         <option 
           value="{{add @index 1}}" 
           {{! checks if the current option matches the review's existing rating}}

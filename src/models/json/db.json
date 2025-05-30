@@ -7,7 +7,9 @@
       "email": "pp@pp.ie",
       "password": "$2b$10$clR4EuF/TLvxL/.OI9ndhO90QXqKHgIjgPO/n4lAcr/b0vEgAvKXC",
       "role": "admin",
-      "favorites": []
+      "favorites": [
+        "45d4bd98-f330-439a-9bda-91e659e35267"
+      ]
     },
     {
       "_id": "64f3e842-f47c-43f7-8aa8-5edeeb5dfd30",
@@ -22,7 +24,8 @@
       "firstName": "yy",
       "lastName": "yy",
       "email": "yy@yy.ie",
-      "password": "$2b$10$azGWxgNmqo7Eann6DGiLsuASZ5JH2etc.c/RwUDr3sBRUlr5JsORi"
+      "password": "$2b$10$azGWxgNmqo7Eann6DGiLsuASZ5JH2etc.c/RwUDr3sBRUlr5JsORi",
+      "role": "admin"
     },
     {
       "_id": "21da04bc-0a12-4977-a170-dba320130b32",
@@ -30,6 +33,23 @@
       "lastName": "uu",
       "email": "uu@uu.ie",
       "password": "$2b$10$bfi3leAYdlJ/ApsViXYe..N7Vvjcol.wDH48/SFbo6zpJHeDTUpfS"
+    },
+    {
+      "_id": "53f9c21f-df3b-42ea-9574-07c14bfa029e",
+      "firstName": "hello",
+      "lastName": "hello",
+      "email": "hello@hello.ie",
+      "password": "$2b$10$/SBqLOKttYXrTAsNr4F.9.ePJDmLblXzmK0.wtSX.Q7mvWkldZooy"
+    },
+    {
+      "_id": "236037c8-58a3-4605-a921-7fa79e2528d7",
+      "firstName": "kamil",
+      "lastName": "szlufik",
+      "email": "kam@kam.ie",
+      "password": "$2b$10$iFupgtGlN1Pend8t5Ic8sOagGOb5qaTtMnk3aFNeFhXEsL6.LE56i",
+      "favorites": [
+        "a39eb544-5a2e-4c63-b34d-e455b480c253"
+      ]
     }
   ],
   "pois": [
@@ -75,17 +95,7 @@
       "category": "park",
       "isPrivate": false,
       "images": [],
-      "markers": [
-        {
-          "title": "tree",
-          "description": "old tree",
-          "latitude": 123,
-          "longitude": 123,
-          "image": null,
-          "_id": "4d344dd7-ccb9-413a-a3cd-4cbf11a8257e",
-          "poiId": "45d4bd98-f330-439a-9bda-91e659e35267"
-        }
-      ],
+      "markers": [],
       "reviews": [
         {
           "_id": "7d8578b8-30ac-40e0-bd5f-2ad4af6ba84b",
@@ -94,6 +104,14 @@
           "rating": 2,
           "comment": "great spot\r\n",
           "createdAt": "2025-05-27T00:11:34.996Z"
+        },
+        {
+          "_id": "f3600053-753d-434a-9d52-580a722c48eb",
+          "userId": "1c5511df-45c1-4466-8d99-87c539c41992",
+          "username": "pp pp",
+          "rating": 2,
+          "comment": "here is teh fix \r\n",
+          "createdAt": "2025-05-30T15:00:43.465Z"
         }
       ],
       "_id": "45d4bd98-f330-439a-9bda-91e659e35267"
@@ -110,6 +128,34 @@
       "markers": [],
       "reviews": [],
       "_id": "0a97c3b0-9296-46b8-ad52-e03959fb7646"
+    },
+    {
+      "userId": "53f9c21f-df3b-42ea-9574-07c14bfa029e",
+      "title": "mountain",
+      "description": "a mountain in Ireland ",
+      "latitude": "123",
+      "longitude": "321",
+      "category": "nature",
+      "isPrivate": false,
+      "images": [],
+      "markers": [],
+      "reviews": [],
+      "_id": "1c3f7d6c-deed-4452-829f-c673a2c84fe3"
+    },
+    {
+      "userId": "236037c8-58a3-4605-a921-7fa79e2528d7",
+      "title": "mountain",
+      "description": "mountain",
+      "latitude": "124",
+      "longitude": "321",
+      "category": "nature",
+      "isPrivate": false,
+      "images": [
+        "/uploads/0bf8d7a4-53d7-4b3f-b074-c8a37cf2405f-logo (1).jpg"
+      ],
+      "markers": [],
+      "reviews": [],
+      "_id": "a39eb544-5a2e-4c63-b34d-e455b480c253"
     }
   ],
   "discussions": [
@@ -162,6 +208,39 @@
         }
       ],
       "timestamp": "2025-05-21T23:18:04.870Z"
+    },
+    {
+      "userId": "1c5511df-45c1-4466-8d99-87c539c41992",
+      "userName": "pp",
+      "content": "1313",
+      "_id": "8346dc7a-0433-4178-b485-b0887293996a",
+      "replies": [],
+      "timestamp": "2025-05-29T10:01:21.955Z"
+    },
+    {
+      "userId": "1c5511df-45c1-4466-8d99-87c539c41992",
+      "userName": "pp",
+      "content": "this is my second discussion ",
+      "_id": "80631b72-ffb1-4bb1-bf5e-630aab4c2175",
+      "replies": [
+        {
+          "userId": "1c5511df-45c1-4466-8d99-87c539c41992",
+          "userName": "pp",
+          "content": "im replying to my own message ",
+          "_id": "ee79c43f-8779-4447-a206-b1df12d24480",
+          "timestamp": "2025-05-29T10:37:10.595Z",
+          "replies": [
+            {
+              "userId": "1c5511df-45c1-4466-8d99-87c539c41992",
+              "userName": "pp",
+              "content": "hello its a reply",
+              "_id": "e83544fa-2ef8-4205-85cd-0573b8fd3423",
+              "timestamp": "2025-05-29T10:37:26.155Z"
+            }
+          ]
+        }
+      ],
+      "timestamp": "2025-05-29T10:36:55.706Z"
     }
   ],
   "markers": []

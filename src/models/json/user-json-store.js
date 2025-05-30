@@ -9,7 +9,7 @@ export const userJsonStore = {
   // Get all users from the database
   async getAllUsers() {
     await db.read();
-    return db.data.users || []; // return empty array if no users
+    return db.data.users || []; 
   },
 
   // Add a new user

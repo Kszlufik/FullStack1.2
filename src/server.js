@@ -44,6 +44,7 @@ async function init() {
   Handlebars.registerHelper("subtract", (a, b) => a - b);
   Handlebars.registerHelper("eq", (a, b) => a === b);
   Handlebars.registerHelper("gt", (a, b) => a > b);
+  Handlebars.registerHelper("or", (a, b) => a || b);
 
   //configure handlebars view engine
   server.views({

@@ -24,8 +24,8 @@ export const accountsController = {
   signup: {
     auth: false,
     validate: {
-      payload: UserSpec, // joi validation schema
-      options: { abortEarly: false }, // return all validation errors
+      payload: UserSpec, 
+      options: { abortEarly: false }, 
       failAction: function (request, h, error) {
         return h
           .view("signup-view", {

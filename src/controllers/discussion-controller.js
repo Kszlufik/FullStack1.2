@@ -37,7 +37,7 @@ export const discussionController = {
         content: replyContent,
       });
 
-      return h.redirect("/discussions"); // Refresh the page
+      return h.redirect("/discussions"); 
     }
   }
 };
